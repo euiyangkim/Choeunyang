@@ -1,2 +1,8 @@
+<<<<<<< HEAD
 Github Test!! 
 Chanhee is short.ajsidfaskdjfklasj;dlkfjalksdlkasgih
+=======
+Github Test!!
+
+Ahin edited this file.
+>>>>>>> f4dc8144a827c510f2efdb27683cc632f7e15388
