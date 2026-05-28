@@ -5,5 +5,11 @@ Chanhee is short.ajsidfaskdjfklasj;dlkfjalksdlkasgih
 Github Test!!
 
 Ahin edited this file.
+<<<<<<< HEAD
 >>>>>>> f4dc8144a827c510f2efdb27683cc632f7e15388 
 Chanhee edited this file
+=======
+>>>>>>> f4dc8144a827c510f2efdb27683cc632f7e15388
+
+Euiyang edited this file.
+>>>>>>> 533b79fcb54ce03b177229c0e0324324766ba83c
