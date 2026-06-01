@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<!--
+   바나바 - 메인 홈 페이지 (index.html)
+   - 큰 Hero 영역에 사이트 이름 "바나바" 강조
+   - 5개 서비스 페이지로 가는 카드 링크
+-->
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>바나바 - 한동 새내기 정보 사이트</title>
+    <!-- 공통 디자인 css -->
+    <link rel="stylesheet" href="style.css">
+    <!-- 메인 홈은 공통 스타일만 써도 충분해서 페이지 전용 <style>은 없음 -->
+</head>
+<body>
+
+    <!-- ========== 헤더 (시맨틱 태그 활용) ========== -->
+    <header>
+        <div class="header-inner">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="assets/handong-logo.png" alt="한동대학교 로고">
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="registration.html">수강신청</a></li>
+                    <li><a href="career.html">진로탐색 + 학점 계산기</a></li>
+                    <li><a href="map.html">캠퍼스 맵</a></li>
+                    <li><a href="life.html">낭만 Life</a></li>
+                    <li><a href="histudy.html">Histudy</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ========== Hero 섹션 ==========
+         "바" 빨강, "나" 초록, "바" 파랑 - 시안 그대로 -->
+    <section class="hero">
+        <h1>
+            <span class="ba1">바</span><span class="na">나</span><span class="ba2">바</span>
+        </h1>
+        <p>한동대 새내기를 위한 모든 정보, 한 곳에서</p>
+        <a href="#services" class="btn-more">더 알아보기 ↓</a>
+    </section>
+
+    <!-- ========== 본문: 3열 서비스 카드 그리드 ========== -->
+    <main>
+        <h2 class="section-title">서비스 둘러보기</h2>
+
+        <div id="services" class="services">
+
+            <a href="registration.html" class="service-card">
+                <div class="icon">📋</div>
+                <h3>수강신청</h3>
+                <p>서버시간 시계, 수강신청 꿀팁, 선배 Q&amp;A</p>
+            </a>
+
+            <a href="career.html" class="service-card">
+                <div class="icon">🧭</div>
+                <h3>진로 탐색</h3>
+                <p>학부 행사 캘린더, 학점 계산기, 진로 사이트 모음</p>
+            </a>
+
+            <a href="map.html" class="service-card">
+                <div class="icon">🗺️</div>
+                <h3>캠퍼스 맵</h3>
+                <p>건물별 정보 hover, 학부 위치 한눈에</p>
+            </a>
+
+            <a href="life.html" class="service-card">
+                <div class="icon">🎵</div>
+                <h3>낭만 Life</h3>
+                <p>동아리 소개, 기숙사 꿀팁, 맛집 추천</p>
+            </a>
+
+            <a href="histudy.html" class="service-card">
+                <div class="icon">📚</div>
+                <h3>Histudy</h3>
+                <p>과목별 자료, 시험 팁, Q&amp;A 게시판</p>
+            </a>
+
+        </div>
+
+        <!-- 사이트 소개 -->
+        <h2 class="section-title">바나바는요</h2>
+        <article class="tip-article body-text">
+            <h4>새내기의 정보 홍수를 한 번에 정리해드려요</h4>
+            <p>
+                새로 한동에 입학한 신입생으로서 수많은 정보의 홍수를 맞이하셨나요?
+                새섬이나 선배들에게 일일이 직접 물어봐야 하는 번거로움을 줄이고,
+                한동 생활에 꼭 필요한 정보들을 한 곳에 모았습니다.
+                학교생활을 더 잘 준비하고 적응할 수 있도록 도와드릴게요!
+            </p>
+        </article>
+    </main>
+
+    <!-- ========== 푸터 ========== -->
+    <footer>
+        <div class="footer-inner">
+            <p><strong>바나바</strong> - 한동 새내기 특화 정보 사이트</p>
+            <p>© 2025 김의양, 곽초은, 양아인, 조찬희 | 조은양의 팀플</p>
+            <div class="sns">
+                <a href="#" title="Instagram">📷</a>
+                <a href="#" title="YouTube">▶️</a>
+                <a href="#" title="Email">✉️</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
