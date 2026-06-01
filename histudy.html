@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<!--
+   바나바 - Histudy 페이지 (histudy.html)
+   - 간단한 사용 가이드
+   - 기존 공부 자료 리스트 + 모달 (CSS :target으로 표시)
+   - 자료 업로드 폼 → 리스트에 즉시 추가 (JS, 토글 가능)
+   - Q&A 게시판
+-->
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Histudy - 바나바</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- =====================================================
+         ★ 이 페이지에만 적용되는 스타일 (Histudy 전용)
+         ===================================================== -->
+    <style>
+        /* 사용 가이드 박스 */
+        .guide-box {
+            background: linear-gradient(135deg, var(--main-color), var(--main-dark));
+            color: #fff;
+            padding: 28px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        .guide-box h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
+            font-family: 'DotGothic16', monospace;
+        }
+        .guide-box ol { padding-left: 20px; }
+        .guide-box ol li { padding: 4px 0; font-size: 15px; }
+
+        /* 자료 리스트 (헤더 행 + 자료 행들) */
+        .resource-list {
+            border: 1px solid var(--gray-line);
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        .resource-item {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr 100px;
+            gap: 12px;
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--gray-line);
+            align-items: center;
+            font-size: 14px;
+        }
+        .resource-item:last-child { border-bottom: none; }
+        .resource-item.header {
+            background: var(--main-color);
+            color: #fff;
+            font-weight: 700;
+        }
+        .resource-item:not(.header):hover { background: var(--light-bg); }
+        .resource-item .subject {
+            color: var(--main-color);
+            font-weight: 700;
+        }
+        .resource-item button {
+            padding: 6px 12px;
+            border: 1px solid var(--main-color);
+            background: #fff;
+            color: var(--main-color);
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+        .resource-item button:hover {
+            background: var(--main-color);
+            color: #fff;
+        }
+        .resource-item a { text-decoration: none; }
+
+        /* 자료 상세 모달 (CSS :target 트릭 - JS 없이 동작!) */
+        .resource-detail {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 200;
+            justify-content: center;
+            align-items: center;
+        }
+        .resource-detail:target { display: flex; }
+        .resource-detail .modal {
+            background: #fff;
+            padding: 32px;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+        }
+        .resource-detail .modal h3 {
+            color: var(--main-color);
+            margin-bottom: 16px;
+            font-size: 22px;
+        }
+        .resource-detail .close {
+            position: absolute;
+            top: 10px; right: 16px;
+            font-size: 26px;
+            text-decoration: none;
+            color: var(--text-sub);
+        }
+        .modal-meta {
+            font-size: 14px;
+            color: var(--text-sub);
+            margin-bottom: 12px;
+        }
+        .modal-content { line-height: 1.7; }
+        .modal-download {
+            margin-top: 16px;
+            color: var(--main-color);
+            font-weight: 700;
+        }
+
+        /* Q&A 게시판 */
+        .qna-board { margin-top: 30px; }
+        .qna-item {
+            border: 1px solid var(--gray-line);
+            border-radius: 6px;
+            margin-bottom: 10px;
+            padding: 16px 20px;
+            background: #fff;
+        }
+        .qna-item .q {
+            font-weight: 700;
+            color: var(--main-color);
+            margin-bottom: 6px;
+            font-size: 15px;
+        }
+        .qna-item .q::before { content: "Q. "; }
+        .qna-item .a {
+            font-size: 14px;
+            color: var(--text-sub);
+            padding-left: 16px;
+            border-left: 3px solid var(--main-color);
+        }
+        .qna-item .a::before { content: "A. "; font-weight: 700; color: var(--main-color); }
+
+        /* 모바일 - 리스트 행을 세로로 쌓기 */
+        @media (max-width: 640px) {
+            .resource-item { grid-template-columns: 1fr; gap: 4px; }
+        }
+    </style>
+</head>
+<body class="sub-page">
+
+    <header>
+        <div class="header-inner">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="assets/handong-logo.png" alt="한동대학교 로고">
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="registration.html">수강신청</a></li>
+                    <li><a href="career.html">진로탐색 + 학점 계산기</a></li>
+                    <li><a href="map.html">캠퍼스 맵</a></li>
+                    <li><a href="life.html">낭만 Life</a></li>
+                    <li><a href="histudy.html" class="active">Histudy</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="page-title">
+        <h1>Histudy 페이지</h1>
+        <p>새로 입학한 학생들이 익숙하지 않은<br>강의들에 대한 도움을 받을 수 있도록 제작</p>
+    </div>
+
+    <main>
+
+        <!-- ===== 0) 사용 가이드 ===== -->
+        <div class="guide-box">
+            <h3>🚀 Histudy 이용 가이드</h3>
+            <ol>
+                <li>아래 <strong>'공부 자료 리스트'</strong>에서 원하는 과목/유형의 자료를 찾아보세요.</li>
+                <li><strong>[자료 확인]</strong> 버튼을 누르면 자료 상세 정보를 볼 수 있습니다.</li>
+                <li>내가 공유하고 싶은 자료가 있다면 <strong>'자료 업로드'</strong> 폼을 작성해주세요.</li>
+                <li>업로드한 자료는 <strong>리스트 상단에 바로 추가</strong>됩니다.</li>
+                <li>궁금한 점은 <strong>Q&amp;A 게시판</strong>에 남겨주세요. 선배들이 답변해드려요!</li>
+            </ol>
+        </div>
+
+        <!-- ===== 1) 공부 자료 리스트 ===== -->
+        <h2 class="section-title">📂 공부 자료 리스트</h2>
+        <p class="section-desc">과목별 시험 대비 팁, 선배들의 공부법, 요약 노트가 모여있어요.</p>
+
+        <div class="resource-list" id="resourceList">
+            <!-- 헤더 행 -->
+            <div class="resource-item header">
+                <div>과목</div>
+                <div>제목</div>
+                <div>유형</div>
+                <div>상세</div>
+            </div>
+
+            <!-- 기존 자료들 (예시) -->
+            <div class="resource-item">
+                <div class="subject">미적분학</div>
+                <div>중간고사 핵심 요약 (3챕터 정리)</div>
+                <div>📝 요약노트</div>
+                <!-- a href="#detail-1" → CSS :target으로 모달 표시 (JS 없이!) -->
+                <div><a href="#detail-1"><button>자료 확인</button></a></div>
+            </div>
+
+            <div class="resource-item">
+                <div class="subject">영어회화 1</div>
+                <div>스피킹 시험 대비 표현 모음</div>
+                <div>💡 시험 팁</div>
+                <div><a href="#detail-2"><button>자료 확인</button></a></div>
+            </div>
+
+            <div class="resource-item">
+                <div class="subject">컴퓨터프로그래밍</div>
+                <div>1학기 기출문제 + 풀이</div>
+                <div>📚 기출자료</div>
+                <div><a href="#detail-3"><button>자료 확인</button></a></div>
+            </div>
+
+            <div class="resource-item">
+                <div class="subject">기독교세계관</div>
+                <div>레포트 작성 가이드</div>
+                <div>📝 요약노트</div>
+                <div><a href="#detail-4"><button>자료 확인</button></a></div>
+            </div>
+
+            <div class="resource-item">
+                <div class="subject">(과목명)</div>
+                <div>(~~한 내용)</div>
+                <div>(유형)</div>
+                <div><button>자료 확인</button></div>
+            </div>
+        </div>
+
+        <!-- 자료 상세 모달들 (CSS :target으로 표시) -->
+        <div class="resource-detail" id="detail-1">
+            <div class="modal">
+                <a href="#" class="close">✕</a>
+                <h3>중간고사 핵심 요약 (3챕터 정리)</h3>
+                <p class="modal-meta">
+                    <strong>과목:</strong> 미적분학 |
+                    <strong>작성자:</strong> 22학번 김선배 |
+                    <strong>등록일:</strong> 2025-04-10
+                </p>
+                <p class="modal-content">
+                    <strong>주요 내용:</strong><br>
+                    • Chapter 1: 극한과 연속<br>
+                    • Chapter 2: 미분의 기본 공식<br>
+                    • Chapter 3: 적분의 활용<br><br>
+                    <strong>특이사항:</strong><br>
+                    교수님이 강조하신 부분 표시해뒀습니다. 시험 직전 30분 정도면 다 훑어볼 수 있어요!
+                </p>
+                <p class="modal-download">
+                    <a href="#">📎 파일 다운로드</a>
+                </p>
+            </div>
+        </div>
+
+        <div class="resource-detail" id="detail-2">
+            <div class="modal">
+                <a href="#" class="close">✕</a>
+                <h3>스피킹 시험 대비 표현 모음</h3>
+                <p class="modal-meta">
+                    <strong>과목:</strong> 영어회화 1 |
+                    <strong>작성자:</strong> 23학번 이선배
+                </p>
+                <p>(~~한 내용)</p>
+            </div>
+        </div>
+
+        <div class="resource-detail" id="detail-3">
+            <div class="modal">
+                <a href="#" class="close">✕</a>
+                <h3>1학기 기출문제 + 풀이</h3>
+                <p>(~~한 내용)</p>
+            </div>
+        </div>
+
+        <div class="resource-detail" id="detail-4">
+            <div class="modal">
+                <a href="#" class="close">✕</a>
+                <h3>레포트 작성 가이드</h3>
+                <p>(~~한 내용)</p>
+            </div>
+        </div>
+
+        <!-- ===== 2) 자료 업로드 폼 ===== -->
+        <h2 class="section-title">📤 자료 업로드</h2>
+        <p class="section-desc">내가 가진 공부 자료를 공유해주세요. 업로드 즉시 위 리스트에 표시됩니다.</p>
+
+        <div class="upload-form">
+            <!-- onsubmit에서 JS로 처리 (서버 전송 X, 화면에만 추가) -->
+            <form id="uploadForm" onsubmit="return addResource(event)">
+
+                <div>
+                    <label for="up-subject">과목명 <span class="required-mark">*</span></label>
+                    <input type="text" id="up-subject" placeholder="예: 미적분학, 영어회화 1" required>
+                </div>
+
+                <div>
+                    <label for="up-title">자료 제목 <span class="required-mark">*</span></label>
+                    <input type="text" id="up-title" placeholder="예: 기말고사 핵심 요약" required>
+                </div>
+
+                <!-- 유형 선택 -->
+                <div>
+                    <label for="up-type">자료 유형 <span class="required-mark">*</span></label>
+                    <select id="up-type" required>
+                        <option value="">선택해주세요</option>
+                        <option value="📝 요약노트">📝 요약노트</option>
+                        <option value="💡 시험 팁">💡 시험 팁</option>
+                        <option value="📚 기출자료">📚 기출자료</option>
+                        <option value="📖 공부법">📖 공부법</option>
+                        <option value="📌 기타">📌 기타</option>
+                    </select>
+                </div>
+
+                <!-- 상세 내용 (textarea) -->
+                <div>
+                    <label for="up-description">상세 내용</label>
+                    <textarea id="up-description" placeholder="자료에 대한 상세 설명을 적어주세요"></textarea>
+                </div>
+
+                <!-- 파일 첨부 -->
+                <div>
+                    <label for="up-file">파일 첨부 (선택)</label>
+                    <input type="file" id="up-file" accept=".pdf,.docx,.hwp,.txt,.jpg,.png">
+                </div>
+
+                <button type="submit">등록하기</button>
+            </form>
+        </div>
+
+        <!-- ================================================================
+             ★★★ [JS 업로드→리스트 추가 기능] 기본 동작 (항상 활성) ★★★
+             아래 stub 함수는 폼이 새로고침되지 않도록만 처리하고 알림만 띄움.
+             이 기본 동작은 항상 켜져있어야 폼 자체가 정상 작동함.
+             ================================================================ -->
+        <script>
+            function addResource(event) {
+                event.preventDefault();   // 페이지 새로고침 막기
+                alert('✅ 자료가 등록되었습니다! (기본 동작 - 실제 추가는 아래 향상된 기능 ON일 때만)');
+                document.getElementById('uploadForm').reset();
+                return false;
+            }
+        </script>
+
+        <!-- ================================================================
+             ★★★ [JS 향상된 기능: 업로드 시 리스트에 즉시 추가] ON/OFF ★★★
+             - 켜기: 아래 <script> 그대로 두기 → 폼 제출 시 리스트 맨 위에 새 자료가 바로 추가됨
+             - 끄기: 아래 <script> ... </script> 블록 전체를 통째로 삭제하거나,
+                    HTML 주석으로 감싸세요.
+                    * HTML 주석 시작: 꺽쇠 + 느낌표 + 대시 두 개
+                    * HTML 주석 끝:   대시 두 개 + 꺽쇠
+                    → 끄면 위의 stub만 동작 (알림만 뜨고 리스트는 변하지 않음)
+             ================================================================ -->
+        <script>
+            // 위 기본 addResource를 덮어쓰는 향상된 버전
+            function addResource(event) {
+                event.preventDefault();
+
+                // 입력값 읽기
+                const subject     = document.getElementById('up-subject').value;
+                const title       = document.getElementById('up-title').value;
+                const type        = document.getElementById('up-type').value;
+                const description = document.getElementById('up-description').value || '(상세 내용 없음)';
+
+                // 새 자료의 고유 ID (현재 시간 기반)
+                const newId = 'detail-new-' + Date.now();
+
+                // 1) 리스트에 새 항목 추가
+                const list = document.getElementById('resourceList');
+                const newItem = document.createElement('div');
+                newItem.className = 'resource-item';
+                newItem.innerHTML = `
+                    <div class="subject">${subject}</div>
+                    <div>${title}</div>
+                    <div>${type}</div>
+                    <div><a href="#${newId}"><button>자료 확인</button></a></div>
+                `;
+                // header 다음(맨 위)에 새 자료 삽입
+                list.insertBefore(newItem, list.children[1]);
+
+                // 2) 상세 모달도 함께 생성
+                const modal = document.createElement('div');
+                modal.className = 'resource-detail';
+                modal.id = newId;
+                modal.innerHTML = `
+                    <div class="modal">
+                        <a href="#" class="close">✕</a>
+                        <h3>${title}</h3>
+                        <p class="modal-meta">
+                            <strong>과목:</strong> ${subject} |
+                            <strong>유형:</strong> ${type} |
+                            <strong>등록일:</strong> ${new Date().toLocaleDateString('ko-KR')}
+                        </p>
+                        <p class="modal-content">${description.replace(/\n/g, '<br>')}</p>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+
+                // 폼 초기화
+                document.getElementById('uploadForm').reset();
+                alert('✅ 자료가 등록되었습니다!\n리스트 상단을 확인해보세요.');
+                return false;
+            }
+        </script>
+        <!-- ================ [향상된 기능] 끝 ================ -->
+
+        <!-- ===== 3) Q&A 게시판 ===== -->
+        <h2 class="section-title">💬 Q&amp;A 게시판</h2>
+        <p class="section-desc">궁금한 점을 남겨주세요. 선배들과 동기들이 답변해드립니다.</p>
+
+        <div class="qna-board">
+            <div class="qna-item">
+                <p class="q">미적분학 중간고사 어떻게 공부했나요?</p>
+                <p class="a">교수님이 주신 연습문제 위주로 풀고, 위 요약노트 자료 활용했어요. 적분 파트가 비중 높으니 그쪽 집중!</p>
+            </div>
+
+            <div class="qna-item">
+                <p class="q">컴퓨터프로그래밍 처음인데 따라갈 수 있을까요?</p>
+                <p class="a">처음 한 달은 어려워요. 매주 실습 미리 해보고 모르면 바로 질문하세요. (~~한 내용)</p>
+            </div>
+
+            <div class="qna-item">
+                <p class="q">(~~한 질문)</p>
+                <p class="a">(~~한 답변)</p>
+            </div>
+
+            <div class="qna-item">
+                <p class="q">(~~한 질문)</p>
+                <p class="a">(아직 답변 대기 중)</p>
+            </div>
+        </div>
+
+        <!-- 질문 등록 폼 -->
+        <h3 class="sub-title lg spaced">✏️ 질문 남기기</h3>
+        <div class="upload-form">
+            <form onsubmit="alert('질문이 등록되었습니다!'); return false;">
+                <div>
+                    <label for="qna-q-title">질문 제목</label>
+                    <input type="text" id="qna-q-title" placeholder="질문을 한 줄로 요약해주세요" required>
+                </div>
+                <div>
+                    <label for="qna-q-content">상세 내용</label>
+                    <textarea id="qna-q-content" placeholder="궁금한 점을 자세히 적어주세요" required></textarea>
+                </div>
+                <!-- 강의자료 PDF에 input type="submit"도 나오지만, 여기서는 button type="submit" 사용 -->
+                <button type="submit">등록</button>
+            </form>
+        </div>
+
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <p><strong>바나바</strong> - 한동 새내기 특화 정보 사이트</p>
+            <p>© 2025 김의양, 곽초은, 양아인, 조찬희 | 조은양의 팀플</p>
+        </div>
+    </footer>
+
+</body>
+</html>

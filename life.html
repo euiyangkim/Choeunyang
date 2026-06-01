@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<!--
+   바나바 - 낭만 Life 페이지 (life.html)
+   - 상단 자동 슬라이드 (3초마다 자동 전환)
+   - 동아리 카테고리별 분류
+   - 기숙사 꿀팁 + 맛집/놀거리
+-->
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>낭만 Life - 바나바</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- =====================================================
+         ★ 이 페이지에만 적용되는 스타일 (낭만 Life 전용)
+         ===================================================== -->
+    <style>
+        /* 슬라이드 영역 - CSS만으로 자동 회전 (3초마다 사진 바뀜) */
+        .slider {
+            position: relative;
+            width: 100%;
+            max-width: 1000px;
+            margin: 20px auto;
+            height: 450px;
+            overflow: hidden;             /* 이미지 넘침 방지 */
+            border-radius: 8px;
+            background: #000;
+        }
+        .slider .slides {
+            display: flex;
+            width: 400%;                   /* 4장 → 400% */
+            height: 100%;
+            animation: slide 12s infinite; /* 4장 × 3초 = 12초 1사이클 */
+        }
+        .slider .slides > div {
+            width: 25%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-size: 32px;
+            font-family: 'DotGothic16', monospace;
+        }
+        .slide1 { background: linear-gradient(135deg, #0a5a9a, #2a9d3f); }
+        .slide2 { background: linear-gradient(135deg, #e63946, #f4a261); }
+        .slide3 { background: linear-gradient(135deg, #2a9d3f, #0a5a9a); }
+        .slide4 { background: linear-gradient(135deg, #6a4c93, #1982c4); }
+
+        @keyframes slide {
+            0%, 22%   { transform: translateX(0); }
+            25%, 47%  { transform: translateX(-25%); }
+            50%, 72%  { transform: translateX(-50%); }
+            75%, 97%  { transform: translateX(-75%); }
+            100%      { transform: translateX(0); }
+        }
+
+        /* 카테고리 탭 */
+        .club-categories {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 30px 0 20px;
+        }
+        .club-categories .cat-btn {
+            padding: 10px 20px;
+            background: #fff;
+            border: 2px solid var(--main-color);
+            color: var(--main-color);
+            border-radius: 24px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.2s;
+            font-family: inherit;
+            font-size: 14px;
+        }
+        .club-categories .cat-btn:hover,
+        .club-categories .cat-btn.active {
+            background: var(--main-color);
+            color: #fff;
+        }
+
+        /* 동아리 카드 그리드 - 카드 자동 줄바꿈 (flex-wrap: wrap 활용) */
+        .club-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+        .club-card {
+            background: #fff;
+            border: 1px solid var(--gray-line);
+            border-radius: 6px;
+            padding: 18px;
+            transition: all 0.2s;
+        }
+        .club-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+        }
+        .club-card .badge {
+            display: inline-block;
+            background: var(--main-color);
+            color: #fff;
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-bottom: 8px;
+        }
+        .badge-food { background: #e63946 !important; }   /* 맛집 카테고리 */
+        .badge-fun  { background: #2a9d3f !important; }   /* 놀거리 카테고리 */
+        .club-card h4 { font-size: 16px; margin-bottom: 6px; }
+        .club-card p  { font-size: 13px; color: var(--text-sub); }
+
+        /* 동영상 그리드 */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 16px;
+        }
+        .video-grid video {
+            width: 100%;
+            background: #222;
+            border-radius: 8px;
+            min-height: 200px;
+        }
+
+        @media (max-width: 640px) {
+            .slider { height: 280px; }
+        }
+    </style>
+</head>
+<body class="sub-page">
+
+    <header>
+        <div class="header-inner">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="assets/handong-logo.png" alt="한동대학교 로고">
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="registration.html">수강신청</a></li>
+                    <li><a href="career.html">진로탐색 + 학점 계산기</a></li>
+                    <li><a href="map.html">캠퍼스 맵</a></li>
+                    <li><a href="life.html" class="active">낭만 Life</a></li>
+                    <li><a href="histudy.html">Histudy</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="page-title">
+        <h1>낭만 Life 페이지</h1>
+        <p>신입생들이 풍성하고 즐거운<br>학교생활(낭만)을 누릴 수 있도록 제작</p>
+    </div>
+
+    <main>
+
+        <!-- ===== 1) 자동 슬라이드 (3초마다 자동 전환) ===== -->
+        <h2 class="section-title">🎬 동아리 활동 미리보기</h2>
+        <p class="section-desc">3초마다 자동으로 넘어갑니다. (실제 사용 시 사진/영상으로 교체하면 됩니다)</p>
+
+        <div class="slider">
+            <!-- 4장의 슬라이드 - background를 이미지로 교체하면 사진 슬라이드가 됨 -->
+            <div class="slides">
+                <div class="slide1">🎵 공연 동아리 활동 사진</div>
+                <div class="slide2">⚽ 체육 동아리 경기 모습</div>
+                <div class="slide3">🙏 선교 단체 활동 영상</div>
+                <div class="slide4">🎨 취미 동아리 작품 전시</div>
+            </div>
+        </div>
+
+        <!-- ===== 2) 동아리 소개 (카테고리별) ===== -->
+        <h2 class="section-title">🎯 동아리 둘러보기</h2>
+
+        <div class="club-categories">
+            <button class="cat-btn active">전체</button>
+            <button class="cat-btn">🎵 공연 동아리</button>
+            <button class="cat-btn">⚽ 체육 동아리</button>
+            <button class="cat-btn">🙏 선교 단체</button>
+            <button class="cat-btn">🎨 취미 동아리</button>
+            <button class="cat-btn">📚 학술 동아리</button>
+        </div>
+
+        <!-- article 태그 - 독립적인 콘텐츠 블록 -->
+        <div class="club-list">
+
+            <article class="club-card">
+                <span class="badge">🎵 공연</span>
+                <h4>(밴드 동아리명)</h4>
+                <p>(~~한 동아리 소개)<br>모집 인원: (~~명) | 활동: (~~)</p>
+            </article>
+
+            <article class="club-card">
+                <span class="badge">🎵 공연</span>
+                <h4>(댄스 동아리명)</h4>
+                <p>(~~한 동아리 소개)</p>
+            </article>
+
+            <article class="club-card">
+                <span class="badge">⚽ 체육</span>
+                <h4>(축구 동아리명)</h4>
+                <p>(~~한 동아리 소개)</p>
+            </article>
+
+            <article class="club-card">
+                <span class="badge">⚽ 체육</span>
+                <h4>(농구 동아리명)</h4>
+                <p>(~~한 동아리 소개)</p>
+            </article>
+
+            <article class="club-card">
+                <span class="badge">🙏 선교</span>
+                <h4>(선교 단체명 1)</h4>
+                <p>(~~한 단체 소개)<br>모임: (~~요일/시간)</p>
+            </article>
+
+            <article class="club-card">
+                <span class="badge">🙏 선교</span>
+                <h4>(선교 단체명 2)</h4>
+                <p>(~~한 단체 소개)</p>
+            </article>
+
+            <article class="club-card">
+                <span class="badge">🎨 취미</span>
+                <h4>(사진 동아리명)</h4>
+                <p>(~~한 동아리 소개)</p>
+            </article>
+
+            <article class="club-card">
+                <span class="badge">🎨 취미</span>
+                <h4>(요리 동아리명)</h4>
+                <p>(~~한 동아리 소개)</p>
+            </article>
+
+            <article class="club-card">
+                <span class="badge">📚 학술</span>
+                <h4>(영어 토론)</h4>
+                <p>(~~한 동아리 소개)</p>
+            </article>
+
+            <article class="club-card">
+                <span class="badge">📚 학술</span>
+                <h4>(코딩 동아리)</h4>
+                <p>(~~한 동아리 소개)</p>
+            </article>
+
+        </div>
+
+        <!-- 동아리 홍보 영상 (video controls poster="썸네일" 활용) -->
+        <h3 class="sub-title lg spaced">📹 동아리 홍보 영상</h3>
+        <div class="video-grid">
+            <video controls poster="">
+                <source src="" type="video/mp4">
+                동아리 홍보 영상 1 (영상 파일 추가 필요)
+            </video>
+            <video controls poster="">
+                <source src="" type="video/mp4">
+                동아리 홍보 영상 2 (영상 파일 추가 필요)
+            </video>
+        </div>
+
+        <!-- ===== 3) 기숙사 생활 꿀팁 ===== -->
+        <h2 class="section-title">🏠 기숙사 생활 꿀팁</h2>
+
+        <article class="tip-article">
+            <h4>📦 입사 전 준비물</h4>
+            <p>
+                (~~한 내용) - 꼭 챙겨야 할 것: 이불, 베개, 멀티탭, 슬리퍼, 빨래바구니, 옷걸이...<br>
+                현지에서 사도 되는 것: (~~한 내용)<br>
+                절대 가져오지 말 것: (~~한 내용)
+            </p>
+        </article>
+
+        <article class="tip-article">
+            <h4>🚿 샤워실/세탁실 이용 팁</h4>
+            <p>(~~한 내용) - 붐비는 시간대 피하기, 세탁기 예약 방법, 건조기 사용법 등</p>
+        </article>
+
+        <article class="tip-article">
+            <h4>🍜 야식 & 간식 추천</h4>
+            <p>(~~한 내용) - 기숙사에서 만들기 좋은 간단 야식, 룸메이트와 나눠 먹기 좋은 간식</p>
+        </article>
+
+        <article class="tip-article">
+            <h4>🛏️ 룸메이트와 잘 지내는 법</h4>
+            <p>(~~한 내용) - 규칙 정하기, 갈등 해결 방법, 서로 배려하는 팁</p>
+        </article>
+
+        <article class="tip-article">
+            <h4>💡 기숙사 편의시설 활용</h4>
+            <p>(~~한 내용) - 공용 주방, 스터디룸, 휴게실, 정수기 위치 등</p>
+        </article>
+
+        <!-- ===== 4) 학교 근처 맛집 / 놀 곳 ===== -->
+        <h2 class="section-title">🍴 학교 근처 맛집 & 놀 곳</h2>
+
+        <h3 class="sub-title">🥘 맛집 추천</h3>
+        <div class="club-list">
+            <article class="club-card">
+                <span class="badge badge-food">🍜 분식</span>
+                <h4>(맛집 이름 1)</h4>
+                <p>(~~한 메뉴)<br>가격대: (~~원)<br>위치: (학교에서 도보 ~분)</p>
+            </article>
+
+            <article class="club-card">
+                <span class="badge badge-food">🍖 한식</span>
+                <h4>(맛집 이름 2)</h4>
+                <p>(~~한 메뉴)<br>가격대: (~~원)</p>
+            </article>
+
+            <article class="club-card">
+                <span class="badge badge-food">🍝 양식</span>
+                <h4>(맛집 이름 3)</h4>
+                <p>(~~한 메뉴)<br>가격대: (~~원)</p>
+            </article>
+
+            <article class="club-card">
+                <span class="badge badge-food">🍣 일식</span>
+                <h4>(맛집 이름 4)</h4>
+                <p>(~~한 메뉴)<br>가격대: (~~원)</p>
+            </article>
+
+            <article class="club-card">
+                <span class="badge badge-food">🥟 중식</span>
+                <h4>(맛집 이름 5)</h4>
+                <p>(~~한 메뉴)<br>가격대: (~~원)</p>
+            </article>
+
+            <article class="club-card">
+                <span class="badge badge-food">☕ 카페</span>
+                <h4>(카페 이름)</h4>
+                <p>(~~한 분위기/메뉴)</p>
+            </article>
+        </div>
+
+        <h3 class="sub-title">🎪 놀 곳 추천</h3>
+        <div class="club-list">
+            <article class="club-card">
+                <span class="badge badge-fun">🎬 문화</span>
+                <h4>(영화관 / 노래방 등)</h4>
+                <p>(~~한 설명)<br>위치: (~~)</p>
+            </article>
+
+            <article class="club-card">
+                <span class="badge badge-fun">🌊 자연</span>
+                <h4>영일대 해수욕장</h4>
+                <p>학교에서 차로 (~~분)<br>드라이브, 노을 명소</p>
+            </article>
+
+            <article class="club-card">
+                <span class="badge badge-fun">🛍️ 쇼핑</span>
+                <h4>(쇼핑몰/시장)</h4>
+                <p>(~~한 설명)</p>
+            </article>
+
+            <article class="club-card">
+                <span class="badge badge-fun">🎮 놀이</span>
+                <h4>(추가 놀거리)</h4>
+                <p>(~~한 설명)</p>
+            </article>
+        </div>
+
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <p><strong>바나바</strong> - 한동 새내기 특화 정보 사이트</p>
+            <p>© 2025 김의양, 곽초은, 양아인, 조찬희 | 조은양의 팀플</p>
+        </div>
+    </footer>
+
+</body>
+</html>

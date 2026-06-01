@@ -1,0 +1,558 @@
+/* ============================================================
+   바나바 - 공통 스타일시트 (모든 페이지에서 link로 가져옴)
+   여기에는 사이트 전체에 공통되는 디자인 컨셉만 들어있어요.
+   페이지별 고유 스타일은 각 html 파일의 <head><style> 안에 있어요.
+   ============================================================ */
+
+/* ---------- [1] 폰트 ----------
+   - DotGothic16: 한글 지원 8비트 픽셀 폰트 → 제목용
+   - Noto Sans KR: 기본 고딕체 → 본문 전체 */
+/* @import url('https://fonts.googleapis.com/css2?family=DotGothic16&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap');
+@font-face {
+  font-family: 'DungGeunMo';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* ---------- [2] 색상 변수 (한 곳에서 관리) ---------- */
+:root {
+  --main-color: #0a5a9a; /* 한동대 메인 블루 */
+  --main-dark: #074574; /* 호버 시 어두운 블루 */
+  --light-bg: #f5f7fa; /* 카드/박스 배경 */
+  --gray-line: #e1e4e8; /* 테두리/구분선 */
+  --text-dark: #1a1a1a; /* 본문 텍스트 */
+  --text-sub: #555; /* 부가 텍스트 */
+}
+
+/* ---------- [3] 전체 초기화 (08CSS_박스_모델.pdf 참고) ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'DungGeunMo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+  color: var(--text-dark);
+  background: #fff;
+  line-height: 1.6;
+}
+
+/* ---------- [4] 헤더 (모든 페이지 공통) ----------
+   메인 페이지: 흰 배경 / 서브 페이지: 파란 배경 (body에 .sub-page 클래스) */
+header {
+  position: sticky; /* 스크롤 내려도 상단 고정 */
+  top: 0;
+  z-index: 100;
+  background: #fff;
+  border-bottom: 1px solid var(--gray-line);
+  padding: 18px 5%;
+}
+.sub-page header {
+  background: var(--main-color);
+  border-bottom: none;
+}
+
+header .header-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+}
+
+.logo a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+.logo img {
+  height: 42px;
+  width: auto;
+}
+/* 서브 페이지에서는 흰색 로고 자동 적용 */
+.sub-page .logo img {
+  content: url('assets/handong-logo-white.png');
+}
+
+/* ---------- [5] 네비게이션 ---------- */
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 38px;
+}
+nav ul li a {
+  text-decoration: none;
+  color: var(--text-dark);
+  font-weight: 700;
+  font-size: 16px;
+  padding: 8px 4px;
+  position: relative;
+  transition: color 0.2s;
+}
+nav ul li a:hover {
+  color: var(--main-color);
+}
+
+.sub-page nav ul li a {
+  color: #fff;
+}
+.sub-page nav ul li a:hover {
+  color: #b8d4f0;
+}
+
+/* 현재 페이지 메뉴 아래 ▼ 표시 (PDF 시안 그대로) */
+.sub-page nav ul li a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -22px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid #fff;
+}
+
+/* ---------- [6] 서브 페이지 타이틀 영역 (210 8비트 글꼴 적용) ---------- */
+.page-title {
+  text-align: center;
+  padding: 60px 20px 30px;
+}
+.page-title h1 {
+  font-family:
+    'DungGeunMo' 'DotGothic16',
+    monospace;
+  font-size: 64px;
+  color: var(--text-dark);
+  margin-bottom: 16px;
+  letter-spacing: 2px;
+}
+.page-title p {
+  font-size: 20px;
+  color: var(--text-sub);
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+/* ---------- [7] 메인 컨텐츠 컨테이너 ---------- */
+main {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 5% 80px;
+}
+
+/* 섹션 제목 (각 페이지의 중간 제목) */
+.section-title {
+  font-family:
+    'DungGeunMo' 'DotGothic16',
+    monospace;
+  font-size: 32px;
+  color: var(--main-color);
+  margin: 40px 0 20px;
+  padding-bottom: 12px;
+  border-bottom: 3px solid var(--main-color);
+}
+
+/* ---------- [8] 푸터 (모든 페이지 공통) ---------- */
+footer {
+  background: #222;
+  color: #ccc;
+  padding: 40px 5%;
+  text-align: center;
+  margin-top: 60px;
+}
+footer .footer-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+footer p {
+  font-size: 14px;
+  line-height: 1.8;
+}
+footer .sns {
+  margin-top: 16px;
+}
+footer .sns a {
+  color: #ccc;
+  margin: 0 10px;
+  text-decoration: none;
+  font-size: 18px;
+}
+footer .sns a:hover {
+  color: #fff;
+}
+
+/* ---------- [9] 공통 유틸 클래스 (여러 페이지에서 재사용) ---------- */
+
+/* 섹션 안내 문구 */
+.section-desc {
+  margin-bottom: 16px;
+  color: var(--text-sub);
+}
+.section-desc.spacious {
+  margin-bottom: 20px;
+}
+
+/* 서브 섹션 제목 h3 */
+.sub-title {
+  margin: 30px 0 12px;
+  color: var(--main-color);
+  font-size: 18px;
+}
+.sub-title.lg {
+  font-size: 20px;
+}
+.sub-title.spaced {
+  margin-top: 40px;
+}
+
+.help-text {
+  font-size: 14px;
+  line-height: 1.8;
+}
+.required-mark {
+  color: red;
+}
+
+/* ---------- [10] 공통 테이블 (수강신청 Q&A, 진로 정보표, 캠퍼스맵 등) ---------- */
+table.qna-table {
+  width: 100%;
+  border-collapse: collapse; /* 표 테두리 깔끔하게 (CSS 기본.pdf 참고) */
+  margin: 20px 0;
+}
+table.qna-table th,
+table.qna-table td {
+  border: 1px solid var(--gray-line);
+  padding: 12px 16px;
+  text-align: left;
+}
+table.qna-table th {
+  background: var(--main-color);
+  color: #fff;
+  font-weight: 700;
+}
+table.qna-table tr:nth-child(even) td {
+  background: var(--light-bg);
+}
+table.qna-table a {
+  color: var(--main-color);
+  text-decoration: none;
+}
+table.qna-table a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- [11] 공통 폼 (질문 폼, 업로드 폼 등에서 재사용) ---------- */
+.upload-form {
+  background: var(--light-bg);
+  padding: 28px;
+  border-radius: 8px;
+  border: 1px solid var(--gray-line);
+}
+.upload-form form {
+  display: grid;
+  gap: 16px;
+}
+.upload-form label {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--text-dark);
+  display: block;
+  margin-bottom: 4px;
+}
+.upload-form input[type='text'],
+.upload-form input[type='email'],
+.upload-form select,
+.upload-form textarea,
+.upload-form input[type='file'] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--gray-line);
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 14px;
+}
+.upload-form input:focus,
+.upload-form textarea:focus,
+.upload-form select:focus {
+  outline: none;
+  border-color: var(--main-color); /* 포커스 시 메인 컬러 */
+}
+.upload-form textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+.upload-form button {
+  padding: 12px 24px;
+  background: var(--main-color);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-weight: 700;
+  cursor: pointer; /* 클릭 가능 표시 */
+  font-size: 15px;
+  transition: background 0.2s;
+  justify-self: start;
+}
+.upload-form button:hover {
+  background: var(--main-dark);
+}
+
+/* ---------- [12] 공통 카드 .link-card (진로 사이트, 동선 카드 등) ---------- */
+.link-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+.link-card {
+  background: #fff;
+  border: 1px solid var(--gray-line);
+  border-radius: 6px;
+  padding: 18px;
+  text-decoration: none;
+  color: var(--text-dark);
+  transition: all 0.2s;
+  display: block;
+}
+.link-card:hover {
+  border-color: var(--main-color);
+  background: var(--light-bg);
+  transform: translateX(4px);
+}
+.link-card.no-link {
+  cursor: default;
+}
+.link-card.no-link:hover {
+  transform: none;
+}
+.link-card h4 {
+  color: var(--main-color);
+  margin-bottom: 6px;
+  font-size: 16px;
+}
+.link-card p {
+  font-size: 13px;
+  color: var(--text-sub);
+}
+
+/* ---------- [13] 공통 article (메인 소개, 낭만 꿀팁 등) ---------- */
+article.tip-article {
+  background: var(--light-bg);
+  border-left: 4px solid var(--main-color);
+  padding: 20px 24px;
+  margin: 16px 0;
+  border-radius: 0 6px 6px 0;
+}
+article.tip-article h4 {
+  color: var(--main-color);
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+article.tip-article p {
+  font-size: 14px;
+  line-height: 1.7;
+}
+article.tip-article.body-text p {
+  font-size: 16px;
+}
+
+/* ---------- [14] 메인 홈 Hero & 서비스 카드 ---------- */
+.hero {
+  height: 75vh;
+  min-height: 500px;
+  background: linear-gradient(135deg, #e8f0f8 0%, #d4e2f0 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 20px;
+}
+/* 바나바 - "바"는 빨강, "나"는 초록, "바"는 파랑 (시안 그대로) */
+.hero h1 {
+  font-family:
+    'DungGeunMo' 'DotGothic16',
+    monospace;
+  font-size: 180px;
+  letter-spacing: 20px;
+  margin-bottom: 20px;
+}
+.hero h1 .ba1 {
+  color: #e63946;
+}
+.hero h1 .na {
+  color: #2a9d3f;
+}
+.hero h1 .ba2 {
+  color: var(--main-color);
+}
+.hero p {
+  font-size: 22px;
+  color: var(--text-sub);
+  margin-bottom: 30px;
+  font-weight: 500;
+}
+.hero .btn-more {
+  display: inline-block;
+  background: var(--main-color);
+  color: #fff;
+  padding: 14px 38px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 16px;
+  border-radius: 4px;
+  transition:
+    transform 0.25s,
+    background 0.25s;
+}
+.hero .btn-more:hover {
+  background: var(--main-dark);
+  transform: scale(1.05); /* 마우스 호버 시 살짝 커짐 */
+}
+
+/* 3열 카드 그리드 (그리드 레이아웃.pdf 활용) */
+.services {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 40px;
+}
+.service-card {
+  background: var(--light-bg);
+  border-radius: 8px;
+  padding: 32px 24px;
+  text-decoration: none;
+  color: var(--text-dark);
+  border: 1px solid var(--gray-line);
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
+  /* Fade-in: 아래에서 위로 서서히 나타나기 */
+  animation: fadeInUp 0.8s ease-out both;
+}
+.service-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.service-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.service-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.service-card:nth-child(4) {
+  animation-delay: 0.4s;
+}
+.service-card:nth-child(5) {
+  animation-delay: 0.5s;
+}
+.service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(10, 90, 154, 0.18);
+  border-color: var(--main-color);
+}
+.service-card .icon {
+  font-size: 42px;
+  margin-bottom: 12px;
+}
+.service-card h3 {
+  font-family:
+    'DungGeunMo' 'DotGothic16',
+    monospace;
+  font-size: 24px;
+  color: var(--main-color);
+  margin-bottom: 10px;
+}
+.service-card p {
+  font-size: 14px;
+  color: var(--text-sub);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================================
+   [15] 반응형 - 모바일/태블릿
+   ============================================================ */
+
+/* 태블릿 (1024px 이하) */
+@media (max-width: 1024px) {
+  .hero h1 {
+    font-size: 120px;
+    letter-spacing: 10px;
+  }
+  .page-title h1 {
+    font-size: 48px;
+  }
+  .services {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  nav ul {
+    gap: 18px;
+  }
+}
+
+/* 모바일 (640px 이하) */
+@media (max-width: 640px) {
+  header {
+    padding: 12px 4%;
+  }
+  header .header-inner {
+    flex-direction: column;
+    gap: 14px;
+  }
+  nav ul {
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  nav ul li a {
+    font-size: 13px;
+    padding: 4px 6px;
+  }
+  .sub-page nav ul li a.active::after {
+    display: none;
+  }
+
+  .hero {
+    height: 60vh;
+  }
+  .hero h1 {
+    font-size: 70px;
+    letter-spacing: 5px;
+  }
+  .hero p {
+    font-size: 16px;
+  }
+
+  .page-title h1 {
+    font-size: 36px;
+  }
+  .page-title p {
+    font-size: 15px;
+  }
+
+  .services {
+    grid-template-columns: 1fr;
+  }
+  .section-title {
+    font-size: 24px;
+  }
+}
