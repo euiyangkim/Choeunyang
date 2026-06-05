@@ -9,7 +9,6 @@
 
     <style>
 
-        /* 카테고리 탭 */
         .club-categories {
             display: flex;
             gap: 12px;
@@ -34,7 +33,6 @@
             color: #fff;
         }
 
-        /* 동아리 카드 그리드 - 카드 자동 줄바꿈 (flex-wrap: wrap 활용) */
         .club-list {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -61,12 +59,11 @@
             border-radius: 10px;
             margin-bottom: 8px;
         }
-        .badge-food { background: #e63946 !important; }   /* 맛집 카테고리 */
-        .badge-fun  { background: #2a9d3f !important; }   /* 놀거리 카테고리 */
+        .badge-food { background: #e63946 !important; }   
+        .badge-fun  { background: #2a9d3f !important; }   
         .club-card h4 { font-size: 16px; margin-bottom: 6px; }
         .club-card p  { font-size: 13px; color: var(--text-sub); }
 
-        /* 동영상 그리드 */
         .video-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -113,7 +110,6 @@
     <main>
 
    
-        <!-- ===== 2) 동아리 소개 (카테고리별) ===== -->
         <h2 class="section-title"> 동아리 둘러보기</h2>
 
         <div class="club-categories">
@@ -125,7 +121,6 @@
             <button class="cat-btn"> 학술 동아리</button>
         </div>
 
-        <!-- article 태그 - 독립적인 콘텐츠 블록 -->
         <div class="club-list">
 
             <article class="club-card">
@@ -190,7 +185,6 @@
 
         </div>
 
-        <!-- 동아리 홍보 영상 (video controls poster="썸네일" 활용) -->
         <h3 class="sub-title lg spaced"> 동아리 홍보 영상</h3>
         <div class="video-grid">
             <video controls poster="">
@@ -203,7 +197,6 @@
             </video>
         </div>
 
-        <!-- ===== 3) 기숙사 생활 꿀팁 ===== -->
         <h2 class="section-title"> 기숙사 생활 꿀팁</h2>
 
         <article class="tip-article">
@@ -235,7 +228,6 @@
             <p>음식은 휴게실에서! 지하세미나실이나 공부할 수 있는 장소 미리 알아놓기 </p>
         </article>
 
-        <!-- ===== 4) 학교 근처 맛집 / 놀 곳 ===== -->
         <h2 class="section-title">🍴 학교 근처 맛집 & 놀 곳</h2>
 
         <h3 class="sub-title"> 맛집 추천</h3>
