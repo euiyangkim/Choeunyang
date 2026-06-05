@@ -1,11 +1,5 @@
 <!DOCTYPE html>
-<!--
-   바나바 - Histudy 페이지 (histudy.html)
-   - 간단한 사용 가이드
-   - 기존 공부 자료 리스트 + 모달 (CSS :target으로 표시)
-   - 자료 업로드 폼 → 리스트에 즉시 추가 (JS, 토글 가능)
-   - Q&A 게시판
--->
+
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -13,9 +7,7 @@
     <title>Histudy - 바나바</title>
     <link rel="stylesheet" href="style.css">
 
-    <!-- =====================================================
-         ★ 이 페이지에만 적용되는 스타일 (Histudy 전용)
-         ===================================================== -->
+    
     <style>
         /* 사용 가이드 박스 */
         .guide-box {
@@ -33,7 +25,7 @@
         .guide-box ol { padding-left: 20px; }
         .guide-box ol li { padding: 4px 0; font-size: 15px; }
 
-        /* 자료 리스트 (헤더 행 + 자료 행들) */
+
         .resource-list {
             border: 1px solid var(--gray-line);
             border-radius: 8px;
@@ -77,7 +69,6 @@
         }
         .resource-item a { text-decoration: none; }
 
-        /* 자료 상세 모달 (CSS :target 트릭 - JS 없이 동작!) */
         .resource-detail {
             display: none;
             position: fixed;
@@ -120,7 +111,6 @@
             font-weight: 700;
         }
 
-        /* Q&A 게시판 */
         .qna-board { margin-top: 30px; }
         .qna-item {
             border: 1px solid var(--gray-line);
@@ -144,7 +134,6 @@
         }
         .qna-item .a::before { content: "A. "; font-weight: 700; color: var(--main-color); }
 
-        /* 모바일 - 리스트 행을 세로로 쌓기 */
         @media (max-width: 640px) {
             .resource-item { grid-template-columns: 1fr; gap: 4px; }
         }
@@ -190,7 +179,6 @@
             </ol>
         </div>
 
-        <!-- ===== 1) 공부 자료 리스트 ===== -->
         <h2 class="section-title"> 공부 자료 리스트</h2>
         <p class="section-desc">과목별 시험 대비 팁, 선배들의 공부법, 요약 노트가 모여있어요.</p>
 
@@ -241,7 +229,6 @@
             </div>
         </div>
 
-        <!-- 자료 상세 모달들 (CSS :target으로 표시) -->
         <div class="resource-detail" id="detail-1">
             <div class="modal">
                 <a href="#" class="close">✕</a>
@@ -293,7 +280,6 @@
             </div>
         </div>
 
-        <!-- ===== 2) 자료 업로드 폼 ===== -->
         <h2 class="section-title"> 자료 업로드</h2>
         <p class="section-desc">내가 가진 공부 자료를 공유해주세요. 업로드 즉시 위 리스트에 표시됩니다.</p>
 
@@ -311,7 +297,6 @@
                     <input type="text" id="up-title" placeholder="예: 기말고사 핵심 요약" required>
                 </div>
 
-                <!-- 유형 선택 -->
                 <div>
                     <label for="up-type">자료 유형 <span class="required-mark">*</span></label>
                     <select id="up-type" required>
@@ -324,13 +309,11 @@
                     </select>
                 </div>
 
-                <!-- 상세 내용 (textarea) -->
                 <div>
                     <label for="up-description">상세 내용</label>
                     <textarea id="up-description" placeholder="자료에 대한 상세 설명을 적어주세요"></textarea>
                 </div>
 
-                <!-- 파일 첨부 -->
                 <div>
                     <label for="up-file">파일 첨부 (선택)</label>
                     <input type="file" id="up-file" accept=".pdf,.docx,.hwp,.txt,.jpg,.png">
@@ -340,83 +323,7 @@
             </form>
         </div>
 
-        <!-- ================================================================
-             ★★★ [JS 업로드→리스트 추가 기능] 기본 동작 (항상 활성) ★★★
-             아래 stub 함수는 폼이 새로고침되지 않도록만 처리하고 알림만 띄움.
-             이 기본 동작은 항상 켜져있어야 폼 자체가 정상 작동함.
-             ================================================================ -->
-        <script>
-            function addResource(event) {
-                event.preventDefault();   // 페이지 새로고침 막기
-                alert('✅ 자료가 등록되었습니다! (기본 동작 - 실제 추가는 아래 향상된 기능 ON일 때만)');
-                document.getElementById('uploadForm').reset();
-                return false;
-            }
-        </script>
 
-        <!-- ================================================================
-             ★★★ [JS 향상된 기능: 업로드 시 리스트에 즉시 추가] ON/OFF ★★★
-             - 켜기: 아래 <script> 그대로 두기 → 폼 제출 시 리스트 맨 위에 새 자료가 바로 추가됨
-             - 끄기: 아래 <script> ... </script> 블록 전체를 통째로 삭제하거나,
-                    HTML 주석으로 감싸세요.
-                    * HTML 주석 시작: 꺽쇠 + 느낌표 + 대시 두 개
-                    * HTML 주석 끝:   대시 두 개 + 꺽쇠
-                    → 끄면 위의 stub만 동작 (알림만 뜨고 리스트는 변하지 않음)
-             ================================================================ -->
-        <script>
-            // 위 기본 addResource를 덮어쓰는 향상된 버전
-            function addResource(event) {
-                event.preventDefault();
-
-                // 입력값 읽기
-                const subject     = document.getElementById('up-subject').value;
-                const title       = document.getElementById('up-title').value;
-                const type        = document.getElementById('up-type').value;
-                const description = document.getElementById('up-description').value || '(상세 내용 없음)';
-
-                // 새 자료의 고유 ID (현재 시간 기반)
-                const newId = 'detail-new-' + Date.now();
-
-                // 1) 리스트에 새 항목 추가
-                const list = document.getElementById('resourceList');
-                const newItem = document.createElement('div');
-                newItem.className = 'resource-item';
-                newItem.innerHTML = `
-                    <div class="subject">${subject}</div>
-                    <div>${title}</div>
-                    <div>${type}</div>
-                    <div><a href="#${newId}"><button>자료 확인</button></a></div>
-                `;
-                // header 다음(맨 위)에 새 자료 삽입
-                list.insertBefore(newItem, list.children[1]);
-
-                // 2) 상세 모달도 함께 생성
-                const modal = document.createElement('div');
-                modal.className = 'resource-detail';
-                modal.id = newId;
-                modal.innerHTML = `
-                    <div class="modal">
-                        <a href="#" class="close">✕</a>
-                        <h3>${title}</h3>
-                        <p class="modal-meta">
-                            <strong>과목:</strong> ${subject} |
-                            <strong>유형:</strong> ${type} |
-                            <strong>등록일:</strong> ${new Date().toLocaleDateString('ko-KR')}
-                        </p>
-                        <p class="modal-content">${description.replace(/\n/g, '<br>')}</p>
-                    </div>
-                `;
-                document.body.appendChild(modal);
-
-                // 폼 초기화
-                document.getElementById('uploadForm').reset();
-                alert('✅ 자료가 등록되었습니다!\n리스트 상단을 확인해보세요.');
-                return false;
-            }
-        </script>
-        <!-- ================ [향상된 기능] 끝 ================ -->
-
-        <!-- ===== 3) Q&A 게시판 ===== -->
         <h2 class="section-title"> Q&amp;A 게시판</h2>
         <p class="section-desc">궁금한 점을 남겨주세요. 선배들과 동기들이 답변해드립니다.</p>
 
@@ -442,7 +349,6 @@
             </div>
         </div>
 
-        <!-- 질문 등록 폼 -->
         <h3 class="sub-title lg spaced"> 질문 남기기</h3>
         <div class="upload-form">
             <form onsubmit="alert('질문이 등록되었습니다!'); return false;">
