@@ -79,7 +79,7 @@ header .header-inner {
 }
 /* 서브 페이지에서는 흰색 로고 자동 적용 */
 .sub-page .logo img {
-  content: url('assets/handong-logo-white.png');
+  content: url('handong-logo-white.png');
 }
 
 /* ---------- [5] 네비게이션 ---------- */
