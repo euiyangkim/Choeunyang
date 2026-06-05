@@ -198,9 +198,6 @@ footer .sns a:hover {
   margin-bottom: 16px;
   color: var(--text-sub);
 }
-.section-desc.spacious {
-  margin-bottom: 20px;
-}
 
 /* 서브 섹션 제목 h3 */
 .sub-title {
