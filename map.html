@@ -1,10 +1,5 @@
 <!doctype html>
-<!--
-   바나바 - 캠퍼스 맵 페이지 (map.html)
-   - PDF 시안의 한동대 건물 모양 지도 그대로 사용
-   - ★ hover 방식: 핀(point) + 자식 툴팁 패턴
-   - ★ 핀 좌표는 campus-map.png 실제 건물 위치에 맞게 조정됨
--->
+
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
@@ -12,9 +7,7 @@
     <title>캠퍼스 맵 - 바나바</title>
     <link rel="stylesheet" href="style.css" />
 
-    <!-- =====================================================
-         ★ 이 페이지에만 적용되는 스타일 (캠퍼스맵 전용)
-         ===================================================== -->
+  
     <style>
       /* 지도 박스 컨테이너 - 가운데 정렬 */
       .map-container-box {
@@ -76,8 +69,7 @@
         }
       }
 
-      /* ===== 툴팁 카드 - hotspot의 자식 =====
-           평소 숨김 → 부모(.building-hotspot) hover 시 표시 */
+    
       .building-tooltip {
         display: none;
         position: absolute;
@@ -125,7 +117,7 @@
         border-top-color: var(--main-color);
       }
 
-      /* ===== 모바일: 툴팁을 화면 하단 고정 카드로 변경 ===== */
+      /* ===== 툴팁을 화면 하단 고정 카드로 변경 ===== */
       @media (max-width: 768px) {
         .building-tooltip {
           position: fixed; /* 화면 기준 고정 */
@@ -197,25 +189,15 @@
          <strong>모바일 환경:</strong> 핀을 터치하면 화면 하단에 안내 카드가 쑥 올라옵니다.
       </p>
 
-      <!-- ========== 지도 컨테이너 (핀 + 자식 툴팁 패턴) ==========
-             ★ 좌표는 campus-map.png 실제 건물 위치에 맞게 잡음
-             ★ 미세 조정은 인라인 style="top:?%; left:?%;" 값만 바꾸면 됨 -->
+         
       <div class="map-container-box">
         <div class="map-relative-wrapper">
-          <!-- 지도 이미지 -->
+        
           <img src="campus-map.png" alt="한동대학교 캠퍼스 지도" />
 
-          <!--
-                  ▼ 핀 추가 패턴:
-                  <div class="building-hotspot" style="top:?%; left:?%;">
-                      <div class="building-tooltip">
-                          <h4>건물명</h4>
-                          <p>설명 내용</p>
-                      </div>
-                  </div>
-                -->
+        
 
-          <!-- 핀 1: 왼쪽 기울어진 건물 (왼쪽 외곽) -->
+
           <div class="building-hotspot" style="top: 47%; left: 17%">
             <div class="building-tooltip">
               <h4>(왼쪽 외곽 건물)</h4>
@@ -227,7 +209,6 @@
             </div>
           </div>
 
-          <!-- 핀 2: 본관 / 행정동 (중앙 왼쪽 큰 사각형 건물) -->
           <div class="building-hotspot" style="top: 50%; left: 45%">
             <div class="building-tooltip">
               <h4>본관 / 행정동</h4>
@@ -239,7 +220,6 @@
             </div>
           </div>
 
-          <!-- 핀 3: 상단 건물 (가로 작은 사각형 4개) -->
           <div class="building-hotspot" style="top: 17%; left: 53%">
             <div class="building-tooltip">
               <h4>(상단 건물)</h4>
@@ -250,7 +230,6 @@
             </div>
           </div>
 
-          <!-- 핀 4: 효암채플 (중앙 큰 타원형 건물) -->
           <div class="building-hotspot" style="top: 45%; left: 58%">
             <div class="building-tooltip">
               <h4>효암채플</h4>
@@ -262,7 +241,6 @@
             </div>
           </div>
 
-          <!-- 핀 5: 오석관 (Library) - 중앙 오른쪽 작은 원형 건물 -->
           <div class="building-hotspot" style="top: 55%; left: 68%">
             <div class="building-tooltip">
               <h4>오석관 (Library)</h4>
@@ -273,7 +251,6 @@
             </div>
           </div>
 
-          <!-- 핀 6: 뉴턴홀 (오른쪽 상단 가로 건물들) -->
           <div class="building-hotspot" style="top: 32%; left: 82%">
             <div class="building-tooltip">
               <h4>뉴턴홀 (Newton Hall)</h4>
@@ -285,7 +262,6 @@
             </div>
           </div>
 
-          <!-- 핀 7: Cornerstone (CSH) - 오른쪽 학부동 -->
           <div class="building-hotspot" style="top: 55%; left: 85%">
             <div class="building-tooltip">
               <h4>Cornerstone (CSH)</h4>
@@ -297,7 +273,6 @@
             </div>
           </div>
 
-          <!-- 핀 8: 하단 건물 -->
           <div class="building-hotspot" style="top: 75%; left: 53%">
             <div class="building-tooltip">
               <h4>(하단 건물)</h4>
@@ -308,11 +283,9 @@
             </div>
           </div>
 
-          <!-- 핀 추가하려면 위 패턴 복사해서 좌표(top/left)만 수정 -->
         </div>
       </div>
 
-      <!-- 사용법 안내 -->
       <div class="map-legend">
         <h3> 사용 방법</h3>
         <p class="help-text">
@@ -322,7 +295,6 @@
         </p>
       </div>
 
-      <!-- ===== 신입생 단골 동선 ===== -->
       <h2 class="section-title"> 신입생 단골 동선 & 지름길</h2>
       <div class="link-grid">
         <div class="link-card no-link">
@@ -343,7 +315,6 @@
         </div>
       </div>
 
-      <!-- ===== 학부별 위치 안내 ===== -->
       <h2 class="section-title"> 학부별 위치</h2>
       <table class="qna-table">
         <thead>
