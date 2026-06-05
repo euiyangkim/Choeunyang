@@ -16,45 +16,6 @@
          ★ 이 페이지에만 적용되는 스타일 (낭만 Life 전용)
          ===================================================== -->
     <style>
-        /* 슬라이드 영역 - CSS만으로 자동 회전 (3초마다 사진 바뀜) */
-        .slider {
-            position: relative;
-            width: 100%;
-            max-width: 1000px;
-            margin: 20px auto;
-            height: 450px;
-            overflow: hidden;             /* 이미지 넘침 방지 */
-            border-radius: 8px;
-            background: #000;
-        }
-        .slider .slides {
-            display: flex;
-            width: 400%;                   /* 4장 → 400% */
-            height: 100%;
-            /* animation: slide 12s infinite; /* 4장 × 3초 = 12초 1사이클 */ */
-        }
-        .slider .slides > div {
-            width: 25%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #fff;
-            font-size: 32px;
-            font-family: 'DotGothic16', monospace;
-        }
-        .slide1 { background: linear-gradient(135deg, #0a5a9a, #2a9d3f); }
-        .slide2 { background: linear-gradient(135deg, #e63946, #f4a261); }
-        .slide3 { background: linear-gradient(135deg, #2a9d3f, #0a5a9a); }
-        .slide4 { background: linear-gradient(135deg, #6a4c93, #1982c4); }
-/* 
-        @keyframes slide {
-            0%, 22%   { transform: translateX(0); }
-            25%, 47%  { transform: translateX(-25%); }
-            50%, 72%  { transform: translateX(-50%); }
-            75%, 97%  { transform: translateX(-75%); }
-            100%      { transform: translateX(0); }
-        } */
 
         /* 카테고리 탭 */
         .club-categories {
