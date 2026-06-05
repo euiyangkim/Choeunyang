@@ -1,24 +1,14 @@
 <!doctype html>
-<!--
-   바나바 - 수강신청 페이지 (registration.html)
-   - 3개 시계 동시 표시 (iframe)
-   - 카테고리별 수강신청 팁
-   - 선배 Q&A 게시판 (table + 질문 form)
--->
+
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>수강신청 - 바나바</title>
-    <!-- 공통 디자인 (헤더/푸터/색상/폰트 등) -->
     <link rel="stylesheet" href="style.css" />
 
-    <!-- =====================================================
-         ★ 이 페이지에만 적용되는 스타일 (수강신청 전용)
-         시계 박스, 팁 카드 카테고리 등
-         ===================================================== -->
     <style>
-      /* 3개 시계 동시 표시 (flex로 한 줄, 좁아지면 줄바꿈) */
+  
       .clocks {
         display: flex;
         gap: 16px;
@@ -30,7 +20,7 @@
         min-width: 280px;
         border: 2px solid var(--main-color);
         border-radius: 8px;
-        overflow: hidden; /* 이미지/iframe 넘침 방지 */
+        overflow: hidden; 
         background: var(--light-bg);
       }
       .clock-box h4 {
@@ -46,7 +36,7 @@
         display: block;
       }
 
-      /* 카테고리별 수강신청 팁 카드 */
+ 
       .tip-categories {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -87,7 +77,6 @@
         font-weight: 700;
       }
 
-      /* 모바일에서 시계 세로로 쌓이게 */
       @media (max-width: 640px) {
         .clocks {
           flex-direction: column;
@@ -96,7 +85,6 @@
     </style>
   </head>
   <body class="sub-page">
-    <!-- 서브 페이지 → 파란 헤더 -->
 
     <header>
       <div class="header-inner">
@@ -118,7 +106,6 @@
       </div>
     </header>
 
-    <!-- 페이지 타이틀 (210 8비트 글꼴) -->
     <div class="page-title">
       <h1>수강 신청 페이지</h1>
       <p>
@@ -127,34 +114,31 @@
     </div>
 
     <main>
-      <!-- ===== 1) 다양한 사이트의 시계 (iframe 활용) ===== -->
       <h2 class="section-title">다양한 사이트의 시계</h2>
       <p class="section-desc spacious">
         수강신청 때는 이 페이지만 띄워두세요. 3개의 시계가 동시에 보여서 서버시간을 한 눈에 확인할 수 있어요.
       </p>
 
       <div class="clocks">
-        <!-- 시계 1: 한국표준시 -->
+       
         <div class="clock-box">
           <h4>🇰🇷 KST (한국표준시 - time.is)</h4>
           <iframe src="https://time.is/ko/Seoul" title="한국 표준시 시계"></iframe>
         </div>
 
-        <!-- 시계 2: 한국천문연구원 -->
         <div class="clock-box">
           <h4>한국천문연구원 (KASI)</h4>
           <iframe src="https://www.kasi.re.kr/kor/research/pageView/362" title="KASI 표준시"></iframe>
         </div>
 
-        <!-- 시계 3: 세계 표준시 -->
-        <div class="clock-box">
+       <div class="clock-box">
           <h4>World Clock (UTC)</h4>
           <iframe src="https://time.is/UTC" title="UTC 시계"></iframe>
         </div>
-        <!-- iframe이 차단되어 빈 화면으로 보이면 src의 URL을 다른 시계 페이지로 바꿔주세요 -->
+        
       </div>
 
-      <!-- ===== 2) 수강신청 성공 전략 (카테고리별) ===== -->
+    
       <h2 class="section-title">수강신청 성공 전략</h2>
 
       <div class="tip-categories">
@@ -170,7 +154,7 @@
         </div>
 
         <div class="tip-card">
-          <h3>⚡ 당일 전략</h3>
+          <h3> 당일 전략</h3>
           <ul>
             <li>유선 인터넷 사용 권장 (WiFi 비추)</li>
             <li>크롬 브라우저 + 시크릿 모드 1개 같이 열기</li>
@@ -221,7 +205,6 @@
         </div>
       </div>
 
-      <!-- ===== 3) 선배 Q&A 게시판 (table 활용) ===== -->
       <h2 class="section-title">선배들과의 Q&amp;A</h2>
       <p class="section-desc">궁금한 점을 남겨주세요. 선배들이 답변해드립니다.</p>
 
@@ -236,7 +219,7 @@
           </tr>
         </thead>
         <tbody>
-          <!-- target="_blank" → 새 창에서 열림 -->
+         
           <tr>
             <td>5</td>
             <td><a href="#" target="_blank">전공 진입 학점이 어떻게 되나요?</a></td>
@@ -275,8 +258,7 @@
         </tbody>
       </table>
 
-      <!-- 표 열 너비 (페이지 전용이라 위 <style>에 넣을 수도 있지만,
-             간단하니 여기 한 줄로 추가) -->
+
       <style>
         .qna-table .col-no {
           width: 60px;
@@ -292,7 +274,6 @@
         }
       </style>
 
-      <!-- 질문 작성 폼 (form/label/input 활용, HTML5 유효성 검사) -->
       <h3 class="sub-title lg spaced">질문 남기기</h3>
       <div class="upload-form">
         <form
@@ -303,7 +284,7 @@
         >
           <div>
             <label for="qna-title">제목</label>
-            <!-- required 속성으로 빈 값 막기 (HTML5 유효성 검사) -->
+         
             <input type="text" id="qna-title" name="title" placeholder="질문 제목을 입력하세요" required />
           </div>
           <div>
@@ -312,7 +293,7 @@
           </div>
           <div>
             <label for="qna-email">이메일 (답변 알림용)</label>
-            <!-- type="email"이면 자동으로 이메일 형식 검사 -->
+      
             <input type="email" id="qna-email" name="email" placeholder="example@handong.ac.kr" required />
           </div>
           <div>
