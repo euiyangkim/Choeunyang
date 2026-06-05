@@ -9,7 +9,6 @@
 
     
     <style>
-        /* 사용 가이드 박스 */
         .guide-box {
             background: linear-gradient(135deg, var(--main-color), var(--main-dark));
             color: #fff;
@@ -167,7 +166,6 @@
 
     <main>
 
-        <!-- ===== 0) 사용 가이드 ===== -->
         <div class="guide-box">
             <h3> Histudy 이용 가이드</h3>
             <ol>
@@ -183,7 +181,6 @@
         <p class="section-desc">과목별 시험 대비 팁, 선배들의 공부법, 요약 노트가 모여있어요.</p>
 
         <div class="resource-list" id="resourceList">
-            <!-- 헤더 행 -->
             <div class="resource-item header">
                 <div>과목</div>
                 <div>제목</div>
@@ -191,12 +188,10 @@
                 <div>상세</div>
             </div>
 
-            <!-- 기존 자료들 (예시) -->
             <div class="resource-item">
                 <div class="subject">미적분학</div>
                 <div>중간고사 핵심 요약 (3챕터 정리)</div>
                 <div> 요약노트</div>
-                <!-- a href="#detail-1" → CSS :target으로 모달 표시 (JS 없이!) -->
                 <div><a href="#detail-1"><button>자료 확인</button></a></div>
             </div>
 
@@ -284,7 +279,6 @@
         <p class="section-desc">내가 가진 공부 자료를 공유해주세요. 업로드 즉시 위 리스트에 표시됩니다.</p>
 
         <div class="upload-form">
-            <!-- onsubmit에서 JS로 처리 (서버 전송 X, 화면에만 추가) -->
             <form id="uploadForm" onsubmit="return addResource(event)">
 
                 <div>
@@ -360,7 +354,6 @@
                     <label for="qna-q-content">상세 내용</label>
                     <textarea id="qna-q-content" placeholder="궁금한 점을 자세히 적어주세요" required></textarea>
                 </div>
-                <!-- 강의자료 PDF에 input type="submit"도 나오지만, 여기서는 button type="submit" 사용 -->
                 <button type="submit">등록</button>
             </form>
         </div>
