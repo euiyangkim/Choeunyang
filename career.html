@@ -96,16 +96,18 @@
 
         /* 라디오 선택 시 → 해당 이벤트 정보 표시 (순수 CSS!) */
         #date-default:checked ~ .career-layout #info-default,
-        #date-3-15:checked   ~ .career-layout #info-3-15,
-        #date-3-22:checked   ~ .career-layout #info-3-22,
-        #date-4-05:checked   ~ .career-layout #info-4-05,
-        #date-4-12:checked   ~ .career-layout #info-4-12 { display: block; }
+        #date-5-6:checked   ~ .career-layout #info-5-6,
+        #date-5-12:checked   ~ .career-layout #info-5-12,
+        #date-5-13:checked   ~ .career-layout #info-5-13,
+        #date-6-5:checked   ~ .career-layout #info-6-5,
+        #date-6-8:checked   ~ .career-layout #info-6-8{ display: block; }
 
         /* 선택된 날짜는 메인 컬러로 강조 */
-        #date-3-15:checked ~ .career-layout label[for="date-3-15"],
-        #date-3-22:checked ~ .career-layout label[for="date-3-22"],
-        #date-4-05:checked ~ .career-layout label[for="date-4-05"],
-        #date-4-12:checked ~ .career-layout label[for="date-4-12"] {
+        #date-5-6:checked ~ .career-layout label[for="date-5-6"],
+        #date-5-12:checked ~ .career-layout label[for="date-5-12"],
+        #date-5-13:checked ~ .career-layout label[for="date-5-13"],
+        #date-6-5:checked ~ .career-layout label[for="date-6-5"],
+        #date-6-8:checked ~ .career-layout label[for="date-6-8"]{
             background: var(--main-color);
             color: #fff;
         }
@@ -250,12 +252,12 @@
                         <tbody>
                             <tr>
                                 <td></td><td>1</td><td>2</td><td>3</td><td>4</td>
-                                <td><label for="date-6-05" class="has-event">5</label></td>
+                                <td><label for="date-6-5" class="has-event">5</label></td>
                                 <td>6</td>
                             </tr>
                             <tr>
                                 <td>7</td>
-                                <td><label for="date-6-08" class="has-event">8</label></td>
+                                <td><label for="date-6-8" class="has-event">8</label></td>
                                 <td>9</td><td>10</td><td>11</td><td>12</td><td>13</td>
                             </tr>
                             <tr><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td></tr>
