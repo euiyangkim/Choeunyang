@@ -1,10 +1,5 @@
 <!DOCTYPE html>
-<!--
-   바나바 - 진로탐색 + 학점 계산기 페이지 (career.html)
-   - 캘린더(왼쪽) + 행사정보(오른쪽) - CSS만으로 클릭 동작
-   - 학점 계산기 (JS 토글 가능)
-   - 진로 사이트 링크 + 학부 연락처
--->
+
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -12,11 +7,8 @@
     <title>진로탐색 + 학점 계산기 - 바나바</title>
     <link rel="stylesheet" href="style.css">
 
-    <!-- =====================================================
-          이 페이지에만 적용되는 스타일 (진로탐색 전용)
-         ===================================================== -->
+ 
     <style>
-        /* 캘린더 + 정보 패널 - 2단 그리드 */
         .career-layout {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -24,7 +16,6 @@
             margin: 20px 0;
         }
 
-        /* 캘린더 박스 */
         .calendar {
             border: 1px solid var(--gray-line);
             border-radius: 8px;
@@ -48,12 +39,11 @@
         .cal-month.next  { margin-top: 16px; }
         .calendar-note   { margin-top: 12px; font-size: 12px; color: var(--text-sub); }
 
-        /* 캘린더 라디오 (날짜 클릭 → 정보 표시) - HTML5 + CSS만! */
         input[name="cal-date"] { display: none; }
         .calendar label {
             display: block;
             padding: 8px 0;
-            cursor: pointer;             /* 클릭 가능 표시 */
+            cursor: pointer;            
             border-radius: 4px;
             transition: background 0.2s;
         }
@@ -64,7 +54,6 @@
         }
         .calendar label:hover { background: #d4e2f0; }
 
-        /* 이벤트 정보 패널 (오른쪽) */
         .event-info {
             border: 1px solid var(--gray-line);
             border-radius: 8px;
@@ -94,7 +83,6 @@
             font-size: 13px;
         }
 
-        /* 라디오 선택 시 → 해당 이벤트 정보 표시 (순수 CSS!) */
         #date-default:checked ~ .career-layout #info-default,
         #date-5-6:checked   ~ .career-layout #info-5-6,
         #date-5-12:checked   ~ .career-layout #info-5-12,
@@ -102,7 +90,6 @@
         #date-6-5:checked   ~ .career-layout #info-6-5,
         #date-6-8:checked   ~ .career-layout #info-6-8{ display: block; }
 
-        /* 선택된 날짜는 메인 컬러로 강조 */
         #date-5-6:checked ~ .career-layout label[for="date-5-6"],
         #date-5-12:checked ~ .career-layout label[for="date-5-12"],
         #date-5-13:checked ~ .career-layout label[for="date-5-13"],
@@ -112,7 +99,6 @@
             color: #fff;
         }
 
-        /* 학점 계산기 */
         .gpa-calc {
             background: var(--light-bg);
             border: 1px solid var(--gray-line);
@@ -136,7 +122,7 @@
         }
         .gpa-calc input:focus, .gpa-calc select:focus {
             outline: none;
-            border-color: var(--main-color);    /* 포커스 시 메인 컬러 */
+            border-color: var(--main-color);    
         }
         .gpa-calc button {
             padding: 12px;
@@ -162,7 +148,6 @@
         }
         .gpa-big { color: var(--main-color); font-size: 24px; }
 
-        /* 1024px 이하 - 캘린더/정보 패널 세로 배치 */
         @media (max-width: 1024px) {
             .career-layout { grid-template-columns: 1fr; }
         }
@@ -198,9 +183,7 @@
     </div>
 
     <main>
-        <!-- ===== 1) 학부 행사 캘린더 + 정보 패널 =====
-             핵심 트릭: 라디오 버튼을 숨겨두고 label 클릭으로 :checked 상태 변경
-             → CSS 형제 선택자로 정보 패널 표시. 순수 HTML+CSS! -->
+      
         <h2 class="section-title">📅 학부별 행사 일정</h2>
         <p class="section-desc">왼쪽 캘린더에서 빨간 날짜를 클릭하면 오른쪽에 행사 정보가 표시됩니다.</p>
 
@@ -227,7 +210,7 @@
                             <tr><td></td><td></td><td></td><td></td><td></td><td>1</td><td>2</td></tr>
                             <tr><td>3</td><td>4</td><td>5</td>
                                <td><label for="date-5-6" class="has-event">6</label></td>
-                               <td><label for="date-5-7" class="has-event">7</label></td>
+                               <td><label for="date-5-7" class="has-event">7</td>
                                <td><label for="date-5-8" class="has-event">8</label></td>
                                <td>9</td></tr>
                             <tr>
@@ -269,9 +252,7 @@
                     <p class="calendar-note">빨간색 = 행사 있음 (클릭해보세요)</p>
                 </div>
 
-                <!-- 행사 정보 (오른쪽) - CSS로 선택된 날짜만 표시됨 -->
                 <div class="event-info">
-                    <!-- 기본 화면 (날짜 선택 전) -->
                     <div class="event-detail" id="info-default">
                         <h3>행사 안내</h3>
                         <p>
@@ -390,11 +371,9 @@
         </div>
 
         <style>
-            /* 캘린더 안내 강조 색 (이 페이지만 쓰니까 여기 잠깐) */
             .highlight-red { color: #c0392b; }
         </style>
 
-        <!-- ===== 2) 학점 계산기 ===== -->
         <h2 class="section-title">학점 계산기</h2>
         <p class="section-desc">
             과목별 점수를 입력하면 평균 학점(GPA)이 자동 계산됩니다. 전공 진입/졸업 요건을 미리 점검해보세요.
@@ -406,8 +385,8 @@
 
                 <div class="gpa-row">
                     <input type="text" name="subj1" placeholder="과목명 (예: 미적분학)">
-                    <input type="number" name="credit1" placeholder="학점 (예: 3)" min="0" max="6" step="1" oninput="calcGPA()">
-                    <select name="grade1" onchange="calcGPA()">
+                    <input type="number" name="credit1" placeholder="학점 (예: 3)" min="0" max="6" step="1">
+                    <select name="grade1">
                         <option value="">성적 선택</option>
                         <option value="4.5">A+ (4.5)</option>
                         <option value="4.0">A  (4.0)</option>
@@ -423,8 +402,8 @@
 
                 <div class="gpa-row">
                     <input type="text" name="subj2" placeholder="과목명">
-                    <input type="number" name="credit2" placeholder="학점" min="0" max="6" step="1" oninput="calcGPA()">
-                    <select name="grade2" onchange="calcGPA()">
+                    <input type="number" name="credit2" placeholder="학점" min="0" max="6" step="1">
+                    <select name="grade2">
                         <option value="">성적 선택</option>
                         <option value="4.5">A+ (4.5)</option>
                         <option value="4.0">A  (4.0)</option>
@@ -440,8 +419,8 @@
 
                 <div class="gpa-row">
                     <input type="text" name="subj3" placeholder="과목명">
-                    <input type="number" name="credit3" placeholder="학점" min="0" max="6" step="1" oninput="calcGPA()">
-                    <select name="grade3" onchange="calcGPA()">
+                    <input type="number" name="credit3" placeholder="학점" min="0" max="6" step="1" >
+                    <select name="grade3">
                         <option value="">성적 선택</option>
                         <option value="4.5">A+ (4.5)</option>
                         <option value="4.0">A  (4.0)</option>
@@ -459,44 +438,8 @@
                     학점을 입력하면 평균이 자동 계산됩니다
                 </div>
             </form>
-
-            <!-- ================================================================
-                  [JS 자동 계산 기능] ON / OFF 토글 
-                 - 사용하려면 아래 <script> 그대로 두기
-                 - 사용 안 하려면 아래 <script> ... </script> 블록 전체를 통째로
-                   삭제하거나, HTML 주석으로 감싸세요.
-                   * HTML 주석 시작: 꺽쇠 + 느낌표 + 대시 두 개
-                   * HTML 주석 끝:   대시 두 개 + 꺽쇠
-                 - 끄면 input/select 값 변경 시 자동 계산은 안 되지만,
-                   페이지 자체는 정상 작동합니다 (그냥 기본 안내문이 표시됨).
-                 ================================================================ -->
-            <!-- <script>
-                // 학점 입력/성적 선택 시 평균 GPA 자동 계산
-                function calcGPA() {
-                    const form = document.getElementById('gpaForm');
-                    let totalCredits = 0;
-                    let totalPoints = 0;
-                    for (let i = 1; i <= 3; i++) {
-                        const credit = parseFloat(form['credit' + i].value) || 0;
-                        const grade  = parseFloat(form['grade'  + i].value) || 0;
-                        if (credit > 0 && form['grade' + i].value !== '') {
-                            totalCredits += credit;
-                            totalPoints  += credit * grade;
-                        }
-                    }
-                    const result = document.getElementById('gpaResult');
-                    if (totalCredits === 0) {
-                        result.textContent = '학점을 입력하면 평균이 자동 계산됩니다';
-                    } else {
-                        const gpa = (totalPoints / totalCredits).toFixed(2);
-                        result.innerHTML = `총 ${totalCredits}학점 | 평균 평점: <span class="gpa-big">${gpa}</span> / 4.5`;
-                    }
-                }
-            </script> -->
-            <!-- ================ [JS 자동 계산 기능] 끝 ================ -->
         </div>
 
-        <!-- 전공 진입 / 졸업 요건 표 -->
         <h3 class="sub-title lg spaced">📊 전공 진입 / 졸업 요건 (예시)</h3>
         <table class="qna-table">
             <thead>
@@ -529,7 +472,6 @@
             </tbody>
         </table>
 
-        <!-- ===== 3) 진로 탐색 사이트 링크 & 연락처 ===== -->
         <h2 class="section-title">진로 탐색에 도움되는 사이트 & 연락처</h2>
 
         <h3 class="sub-title">한동대 공식</h3>
