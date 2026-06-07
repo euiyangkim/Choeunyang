@@ -10,22 +10,21 @@
     <style>
       .clocks {
         display: flex;
-        gap: 16px;
+        gap: 15px;
         margin: 20px 0 40px;
         flex-wrap: wrap;
       }
       .clock-box {
         flex: 1;
-        min-width: 280px;
+        min-width: 300px;
         border: 2px solid var(--main-color);
-        border-radius: 8px;
-        overflow: hidden;
+        border-radius: 10px;
         background: var(--light-bg);
       }
       .clock-box h4 {
         background: var(--main-color);
         color: #fff;
-        padding: 10px 16px;
+        padding: 10px 15px;
         font-size: 15px;
       }
       .clock-box iframe {
@@ -37,21 +36,21 @@
 
       .tip-categories {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 20px;
         margin: 20px 0;
       }
       .tip-card {
         background: #fff;
         border: 1px solid var(--gray-line);
-        border-top: 4px solid var(--main-color);
-        border-radius: 4px;
-        padding: 24px;
+        border-top: 5px solid var(--main-color);
+        border-radius: 5px;
+        padding: 25px;
       }
 
       .tip-card h3 {
         color: var(--main-color);
-        font-size: 18px;
+        font-size: 20px;
         margin-bottom: 12px;
       }
       .tip-card ul {
@@ -59,13 +58,13 @@
         padding: 0;
       }
       .tip-card ul li {
-        padding: 6px 0;
-        padding-left: 18px;
+        padding: 5px;
+        padding-left: 20px;
         position: relative;
-        font-size: 14px;
+        font-size: 15px;
       }
 
-      @media (max-width: 640px) {
+      @media (max-width: 650px) {
         .clocks {
           flex-direction: column;
         }
@@ -126,7 +125,10 @@
 
         <div class="clock-box">
           <h4>한국 표준시 (타임시커)</h4>
-          <iframe src="https://time.navyism.com/?host=handong.edu" title="타임시커"></iframe>
+          <iframe
+            src="https://time.navyism.com/?host=handong.edu"
+            title="타임시커"
+          ></iframe>
         </div>
       </div>
 
@@ -267,10 +269,7 @@
 
       <h3 class="sub-title lg spaced">질문 남기기</h3>
       <div class="upload-form">
-        <form
-          onsubmit="
-            alert('질문이 등록되었습니다!');"
-        >
+        <form onsubmit="alert('질문이 등록되었습니다!')">
           <div>
             <label for="qna-title">제목</label>
 
