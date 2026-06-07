@@ -113,7 +113,7 @@ nav ul li a:hover {
 }
 .page-title h1 {
   font-family:
-    'DungGeunMo' 'DotGothic16',
+    'DungGeunMo',
     monospace;
   font-size: 64px;
   color: var(--text-dark);
@@ -135,7 +135,7 @@ main {
 
 .section-title {
   font-family:
-    'DungGeunMo' 'DotGothic16',
+    'DungGeunMo',
     monospace;
   font-size: 32px;
   color: var(--main-color);
@@ -351,7 +351,7 @@ article.tip-article.body-text p {
 
 .hero h1 {
   font-family:
-    'DungGeunMo' 'DotGothic16',
+    'DungGeunMo',
     monospace;
   font-size: 180px;
   letter-spacing: 20px;
@@ -435,7 +435,7 @@ article.tip-article.body-text p {
 }
 .service-card h3 {
   font-family:
-    'DungGeunMo' 'DotGothic16',
+    'DungGeunMo',
     monospace;
   font-size: 24px;
   color: var(--main-color);
