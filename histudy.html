@@ -226,7 +226,7 @@
 
         <div class="resource-detail" id="detail-1">
             <div class="modal">
-                <a href="#" class="close">✕</a>
+                <a href="#resourceList" class="close">✕</a>
                 <h3>Group Work 기출 문제</h3>
                 <p class="modal-meta">
                     <strong>과목:</strong> Calculus 1 
@@ -248,7 +248,7 @@
 
         <div class="resource-detail" id="detail-2">
             <div class="modal">
-                <a href="#" class="close">✕</a>
+                <a href="#resourceList" class="close">✕</a>
                 <h3>IRAC</h3>
                 <p class="modal-meta">
                     <strong>과목:</strong> SAL 
@@ -260,7 +260,7 @@
 
         <div class="resource-detail" id="detail-3">
             <div class="modal">
-                <a href="#" class="close">✕</a>
+                <a href="#resourceList" class="close">✕</a>
                 <h3>프입 자료</h3>
                 <p class="modal-meta">
                     <strong>과목:</strong> 프론트엔드 입문
@@ -275,7 +275,7 @@
 
         <div class="resource-detail" id="detail-4">
             <div class="modal">
-                <a href="#" class="close">✕</a>
+                <a href="#resourceList" class="close">✕</a>
                 <h3>강의 노트 모음</h3>
                 <p class="modal-meta">
                     <strong>과목:</strong> 성경의 이해
@@ -290,7 +290,7 @@
 
         <div class="resource-detail" id="detail-5">
             <div class="modal">
-                <a href="#" class="close">✕</a>
+                <a href="#resourceList" class="close">✕</a>
                 <h3>퀴즈 준비 팁</h3>
                 <p class="modal-meta">
                     <strong>과목:</strong> 물리학개론
@@ -305,7 +305,7 @@
         <p class="section-desc">내가 가진 공부 자료를 공유해주세요. 업로드 즉시 위 리스트에 표시됩니다.</p>
 
         <div class="upload-form">
-            <form id="uploadForm" onsubmit="return addResource(event)">
+            <form id="uploadForm">
 
                 <div>
                     <label for="up-subject">과목명 <span class="required-mark">*</span></label>
@@ -372,7 +372,7 @@
 
         <h3 class="sub-title lg spaced"> 질문 남기기</h3>
         <div class="upload-form">
-            <form onsubmit="alert('질문이 등록되었습니다!'); return false;">
+            <form onsubmit="alert('질문이 등록되었습니다!');">
                 <div>
                     <label for="qna-q-title">질문 제목</label>
                     <input type="text" id="qna-q-title" placeholder="질문을 한 줄로 요약해주세요" required>
