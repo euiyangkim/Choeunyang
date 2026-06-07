@@ -1,13 +1,3 @@
-/* ============================================================
-   바나바 - 공통 스타일시트 (모든 페이지에서 link로 가져옴)
-   여기에는 사이트 전체에 공통되는 디자인 컨셉만 들어있어요.
-   페이지별 고유 스타일은 각 html 파일의 <head><style> 안에 있어요.
-   ============================================================ */
-
-/* ---------- [1] 폰트 ----------
-   - DotGothic16: 한글 지원 8비트 픽셀 폰트 → 제목용
-   - Noto Sans KR: 기본 고딕체 → 본문 전체 */
-/* @import url('https://fonts.googleapis.com/css2?family=DotGothic16&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap'); */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap');
 @font-face {
   font-family: 'DungGeunMo';
@@ -16,17 +6,15 @@
   font-style: normal;
 }
 
-/* ---------- [2] 색상 변수 (한 곳에서 관리) ---------- */
 :root {
-  --main-color: #0a5a9a; /* 한동대 메인 블루 */
-  --main-dark: #074574; /* 호버 시 어두운 블루 */
-  --light-bg: #f5f7fa; /* 카드/박스 배경 */
-  --gray-line: #e1e4e8; /* 테두리/구분선 */
-  --text-dark: #1a1a1a; /* 본문 텍스트 */
-  --text-sub: #555; /* 부가 텍스트 */
+  --main-color: #0a5a9a; 
+  --main-dark: #074574; 
+  --light-bg: #f5f7fa; 
+  --gray-line: #e1e4e8; 
+  --text-dark: #1a1a1a; 
+  --text-sub: #555; 
 }
 
-/* ---------- [3] 전체 초기화 (08CSS_박스_모델.pdf 참고) ---------- */
 * {
   margin: 0;
   padding: 0;
@@ -44,10 +32,9 @@ body {
   line-height: 1.6;
 }
 
-/* ---------- [4] 헤더 (모든 페이지 공통) ----------
-   메인 페이지: 흰 배경 / 서브 페이지: 파란 배경 (body에 .sub-page 클래스) */
+
 header {
-  position: sticky; /* 스크롤 내려도 상단 고정 */
+  position: sticky; 
   top: 0;
   z-index: 100;
   background: #fff;
@@ -77,12 +64,11 @@ header .header-inner {
   height: 42px;
   width: auto;
 }
-/* 서브 페이지에서는 흰색 로고 자동 적용 */
+
 .sub-page .logo img {
   content: url('handong-logo-white.png');
 }
 
-/* ---------- [5] 네비게이션 ---------- */
 nav ul {
   list-style: none;
   display: flex;
@@ -108,7 +94,6 @@ nav ul li a:hover {
   color: #b8d4f0;
 }
 
-/* 현재 페이지 메뉴 아래 ▼ 표시 (PDF 시안 그대로) */
 .sub-page nav ul li a.active::after {
   content: '';
   position: absolute;
@@ -122,7 +107,6 @@ nav ul li a:hover {
   border-top: 10px solid #fff;
 }
 
-/* ---------- [6] 서브 페이지 타이틀 영역 (210 8비트 글꼴 적용) ---------- */
 .page-title {
   text-align: center;
   padding: 60px 20px 30px;
@@ -143,14 +127,12 @@ nav ul li a:hover {
   line-height: 1.5;
 }
 
-/* ---------- [7] 메인 컨텐츠 컨테이너 ---------- */
 main {
   max-width: 1400px;
   margin: 0 auto;
   padding: 40px 5% 80px;
 }
 
-/* 섹션 제목 (각 페이지의 중간 제목) */
 .section-title {
   font-family:
     'DungGeunMo' 'DotGothic16',
@@ -162,7 +144,6 @@ main {
   border-bottom: 3px solid var(--main-color);
 }
 
-/* ---------- [8] 푸터 (모든 페이지 공통) ---------- */
 footer {
   background: #222;
   color: #ccc;
@@ -191,15 +172,12 @@ footer .sns a:hover {
   color: #fff;
 }
 
-/* ---------- [9] 공통 유틸 클래스 (여러 페이지에서 재사용) ---------- */
 
-/* 섹션 안내 문구 */
 .section-desc {
   margin-bottom: 16px;
   color: var(--text-sub);
 }
 
-/* 서브 섹션 제목 h3 */
 .sub-title {
   margin: 30px 0 12px;
   color: var(--main-color);
@@ -220,10 +198,9 @@ footer .sns a:hover {
   color: red;
 }
 
-/* ---------- [10] 공통 테이블 (수강신청 Q&A, 진로 정보표, 캠퍼스맵 등) ---------- */
 table.qna-table {
   width: 100%;
-  border-collapse: collapse; /* 표 테두리 깔끔하게 (CSS 기본.pdf 참고) */
+  border-collapse: collapse; 
   margin: 20px 0;
 }
 table.qna-table th,
@@ -248,7 +225,6 @@ table.qna-table a:hover {
   text-decoration: underline;
 }
 
-/* ---------- [11] 공통 폼 (질문 폼, 업로드 폼 등에서 재사용) ---------- */
 .upload-form {
   background: var(--light-bg);
   padding: 28px;
@@ -282,7 +258,7 @@ table.qna-table a:hover {
 .upload-form textarea:focus,
 .upload-form select:focus {
   outline: none;
-  border-color: var(--main-color); /* 포커스 시 메인 컬러 */
+  border-color: var(--main-color); 
 }
 .upload-form textarea {
   min-height: 100px;
@@ -295,7 +271,7 @@ table.qna-table a:hover {
   border: none;
   border-radius: 4px;
   font-weight: 700;
-  cursor: pointer; /* 클릭 가능 표시 */
+  cursor: pointer; 
   font-size: 15px;
   transition: background 0.2s;
   justify-self: start;
@@ -304,7 +280,6 @@ table.qna-table a:hover {
   background: var(--main-dark);
 }
 
-/* ---------- [12] 공통 카드 .link-card (진로 사이트, 동선 카드 등) ---------- */
 .link-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -342,7 +317,6 @@ table.qna-table a:hover {
   color: var(--text-sub);
 }
 
-/* ---------- [13] 공통 article (메인 소개, 낭만 꿀팁 등) ---------- */
 article.tip-article {
   background: var(--light-bg);
   border-left: 4px solid var(--main-color);
@@ -363,7 +337,6 @@ article.tip-article.body-text p {
   font-size: 16px;
 }
 
-/* ---------- [14] 메인 홈 Hero & 서비스 카드 ---------- */
 .hero {
   height: 75vh;
   min-height: 500px;
@@ -375,7 +348,7 @@ article.tip-article.body-text p {
   text-align: center;
   padding: 0 20px;
 }
-/* 바나바 - "바"는 빨강, "나"는 초록, "바"는 파랑 (시안 그대로) */
+
 .hero h1 {
   font-family:
     'DungGeunMo' 'DotGothic16',
@@ -414,10 +387,9 @@ article.tip-article.body-text p {
 }
 .hero .btn-more:hover {
   background: var(--main-dark);
-  transform: scale(1.05); /* 마우스 호버 시 살짝 커짐 */
+  transform: scale(1.05); 
 }
 
-/* 3열 카드 그리드 (그리드 레이아웃.pdf 활용) */
 .services {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -434,8 +406,8 @@ article.tip-article.body-text p {
   transition:
     transform 0.3s,
     box-shadow 0.3s;
-  /* Fade-in: 아래에서 위로 서서히 나타나기 */
-  animation: fadeInUp 0.8s ease-out both;
+
+   animation: fadeInUp 0.8s ease-out both;
 }
 .service-card:nth-child(1) {
   animation-delay: 0.1s;
@@ -485,11 +457,7 @@ article.tip-article.body-text p {
   }
 }
 
-/* ============================================================
-   [15] 반응형 - 모바일/태블릿
-   ============================================================ */
 
-/* 태블릿 (1024px 이하) */
 @media (max-width: 1024px) {
   .hero h1 {
     font-size: 120px;
@@ -506,7 +474,6 @@ article.tip-article.body-text p {
   }
 }
 
-/* 모바일 (640px 이하) */
 @media (max-width: 640px) {
   header {
     padding: 12px 4%;
