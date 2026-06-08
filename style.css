@@ -1,18 +1,19 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap');
 @font-face {
-  font-family: "DungGeunMo";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff")
-    format("woff");
+  font-family: 'DungGeunMo';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
-/* main-color: #0a5a9a;
-main-dark: #074574;
-light-bg: #f5f7fa;
-gray-line: #e1e4e8;
-text-dark: #1a1a1a;
-text-sub: #555; */
+:root {
+  --main-color: #0a5a9a; 
+  --main-dark: #074574; 
+  --light-bg: #f5f7fa; 
+  --gray-line: #e1e4e8; 
+  --text-dark: #1a1a1a; 
+  --text-sub: #555; 
+}
 
 * {
   margin: 0;
@@ -25,22 +26,23 @@ html {
 }
 
 body {
-  font-family: "DungGeunMo", "Noto Sans KR", "Malgun Gothic", sans-serif;
-  color: #1a1a1a;
+  font-family: 'DungGeunMo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+  color: var(--text-dark);
   background: #fff;
   line-height: 1.6;
 }
 
+
 header {
-  position: sticky;
+  position: sticky; 
   top: 0;
   z-index: 100;
   background: #fff;
-  border-bottom: 1px solid #e1e4e8;
+  border-bottom: 1px solid var(--gray-line);
   padding: 18px 5%;
 }
 .sub-page header {
-  background: #0a5a9a;
+  background: var(--main-color);
   border-bottom: none;
 }
 
@@ -64,7 +66,7 @@ header .header-inner {
 }
 
 .sub-page .logo img {
-  content: url("handong-logo-white.png");
+  content: url('handong-logo-white.png');
 }
 
 nav ul {
@@ -74,7 +76,7 @@ nav ul {
 }
 nav ul li a {
   text-decoration: none;
-  color: #1a1a1a;
+  color: var(--text-dark);
   font-weight: 700;
   font-size: 16px;
   padding: 8px 4px;
@@ -82,7 +84,7 @@ nav ul li a {
   transition: color 0.2s;
 }
 nav ul li a:hover {
-  color: #0a5a9a;
+  color: var(--main-color);
 }
 
 .sub-page nav ul li a {
@@ -93,7 +95,7 @@ nav ul li a:hover {
 }
 
 .sub-page nav ul li a.active::after {
-  content: "";
+  content: '';
   position: absolute;
   bottom: -22px;
   left: 50%;
@@ -110,15 +112,17 @@ nav ul li a:hover {
   padding: 60px 20px 30px;
 }
 .page-title h1 {
-  font-family: "DungGeunMo", monospace;
+  font-family:
+    'DungGeunMo',
+    monospace;
   font-size: 64px;
-  color: #1a1a1a;
+  color: var(--text-dark);
   margin-bottom: 16px;
   letter-spacing: 2px;
 }
 .page-title p {
   font-size: 20px;
-  color: #555;
+  color: var(--text-sub);
   font-weight: 500;
   line-height: 1.5;
 }
@@ -130,12 +134,14 @@ main {
 }
 
 .section-title {
-  font-family: "DungGeunMo", monospace;
+  font-family:
+    'DungGeunMo',
+    monospace;
   font-size: 32px;
-  color: #0a5a9a;
+  color: var(--main-color);
   margin: 40px 0 20px;
   padding-bottom: 12px;
-  border-bottom: 3px solid #0a5a9a;
+  border-bottom: 3px solid var(--main-color);
 }
 
 footer {
@@ -166,14 +172,15 @@ footer .sns a:hover {
   color: #fff;
 }
 
+
 .section-desc {
   margin-bottom: 16px;
-  color: #555;
+  color: var(--text-sub);
 }
 
 .sub-title {
   margin: 30px 0 12px;
-  color: #0a5a9a;
+  color: var(--main-color);
   font-size: 18px;
 }
 .sub-title.lg {
@@ -193,25 +200,25 @@ footer .sns a:hover {
 
 table.qna-table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: collapse; 
   margin: 20px 0;
 }
 table.qna-table th,
 table.qna-table td {
-  border: 1px solid #e1e4e8;
+  border: 1px solid var(--gray-line);
   padding: 12px 16px;
   text-align: left;
 }
 table.qna-table th {
-  background: #0a5a9a;
+  background: var(--main-color);
   color: #fff;
   font-weight: 700;
 }
 table.qna-table tr:nth-child(even) td {
-  background: #f5f7fa;
+  background: var(--light-bg);
 }
 table.qna-table a {
-  color: #0a5a9a;
+  color: var(--main-color);
   text-decoration: none;
 }
 table.qna-table a:hover {
@@ -219,10 +226,10 @@ table.qna-table a:hover {
 }
 
 .upload-form {
-  background: #f5f7fa;
+  background: var(--light-bg);
   padding: 28px;
   border-radius: 8px;
-  border: 1px solid #e1e4e8;
+  border: 1px solid var(--gray-line);
 }
 .upload-form form {
   display: grid;
@@ -231,18 +238,18 @@ table.qna-table a:hover {
 .upload-form label {
   font-weight: 700;
   font-size: 14px;
-  color: #1a1a1a;
+  color: var(--text-dark);
   display: block;
   margin-bottom: 4px;
 }
-.upload-form input[type="text"],
-.upload-form input[type="email"],
+.upload-form input[type='text'],
+.upload-form input[type='email'],
 .upload-form select,
 .upload-form textarea,
-.upload-form input[type="file"] {
+.upload-form input[type='file'] {
   width: 100%;
   padding: 10px;
-  border: 1px solid #e1e4e8;
+  border: 1px solid var(--gray-line);
   border-radius: 4px;
   font-family: inherit;
   font-size: 14px;
@@ -251,7 +258,7 @@ table.qna-table a:hover {
 .upload-form textarea:focus,
 .upload-form select:focus {
   outline: none;
-  border-color: #0a5a9a;
+  border-color: var(--main-color); 
 }
 .upload-form textarea {
   min-height: 100px;
@@ -259,18 +266,18 @@ table.qna-table a:hover {
 }
 .upload-form button {
   padding: 12px 24px;
-  background: #0a5a9a;
+  background: var(--main-color);
   color: #fff;
   border: none;
   border-radius: 4px;
   font-weight: 700;
-  cursor: pointer;
+  cursor: pointer; 
   font-size: 15px;
   transition: background 0.2s;
   justify-self: start;
 }
 .upload-form button:hover {
-  background: #074574;
+  background: var(--main-dark);
 }
 
 .link-grid {
@@ -281,17 +288,17 @@ table.qna-table a:hover {
 }
 .link-card {
   background: #fff;
-  border: 1px solid #e1e4e8;
+  border: 1px solid var(--gray-line);
   border-radius: 6px;
   padding: 18px;
   text-decoration: none;
-  color: #1a1a1a;
+  color: var(--text-dark);
   transition: all 0.2s;
   display: block;
 }
 .link-card:hover {
-  border-color: #0a5a9a;
-  background: #f5f7fa;
+  border-color: var(--main-color);
+  background: var(--light-bg);
   transform: translateX(4px);
 }
 .link-card.no-link {
@@ -301,24 +308,24 @@ table.qna-table a:hover {
   transform: none;
 }
 .link-card h4 {
-  color: #0a5a9a;
+  color: var(--main-color);
   margin-bottom: 6px;
   font-size: 16px;
 }
 .link-card p {
   font-size: 13px;
-  color: #555;
+  color: var(--text-sub);
 }
 
 article.tip-article {
-  background: #f5f7fa;
-  border-left: 4px solid #0a5a9a;
+  background: var(--light-bg);
+  border-left: 4px solid var(--main-color);
   padding: 20px 24px;
   margin: 16px 0;
   border-radius: 0 6px 6px 0;
 }
 article.tip-article h4 {
-  color: #0a5a9a;
+  color: var(--main-color);
   margin-bottom: 8px;
   font-size: 18px;
 }
@@ -343,7 +350,9 @@ article.tip-article.body-text p {
 }
 
 .hero h1 {
-  font-family: "DungGeunMo", monospace;
+  font-family:
+    'DungGeunMo',
+    monospace;
   font-size: 180px;
   letter-spacing: 20px;
   margin-bottom: 20px;
@@ -355,17 +364,17 @@ article.tip-article.body-text p {
   color: #2a9d3f;
 }
 .hero h1 .ba2 {
-  color: #0a5a9a;
+  color: var(--main-color);
 }
 .hero p {
   font-size: 22px;
-  color: #555;
+  color: var(--text-sub);
   margin-bottom: 30px;
   font-weight: 500;
 }
 .hero .btn-more {
   display: inline-block;
-  background: #0a5a9a;
+  background: var(--main-color);
   color: #fff;
   padding: 14px 38px;
   text-decoration: none;
@@ -377,8 +386,8 @@ article.tip-article.body-text p {
     background 0.25s;
 }
 .hero .btn-more:hover {
-  background: #074574;
-  transform: scale(1.05);
+  background: var(--main-dark);
+  transform: scale(1.05); 
 }
 
 .services {
@@ -388,17 +397,17 @@ article.tip-article.body-text p {
   margin-top: 40px;
 }
 .service-card {
-  background: #f5f7fa;
+  background: var(--light-bg);
   border-radius: 8px;
   padding: 32px 24px;
   text-decoration: none;
-  color: #1a1a1a;
-  border: 1px solid #e1e4e8;
+  color: var(--text-dark);
+  border: 1px solid var(--gray-line);
   transition:
     transform 0.3s,
     box-shadow 0.3s;
 
-  animation: fadeInUp 0.8s ease-out both;
+   animation: fadeInUp 0.8s ease-out both;
 }
 .service-card:nth-child(1) {
   animation-delay: 0.1s;
@@ -418,21 +427,23 @@ article.tip-article.body-text p {
 .service-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 10px 25px rgba(10, 90, 154, 0.18);
-  border-color: #0a5a9a;
+  border-color: var(--main-color);
 }
 .service-card .icon {
   font-size: 42px;
   margin-bottom: 12px;
 }
 .service-card h3 {
-  font-family: "DungGeunMo", monospace;
+  font-family:
+    'DungGeunMo',
+    monospace;
   font-size: 24px;
-  color: #0a5a9a;
+  color: var(--main-color);
   margin-bottom: 10px;
 }
 .service-card p {
   font-size: 14px;
-  color: #555;
+  color: var(--text-sub);
 }
 
 @keyframes fadeInUp {
@@ -445,6 +456,7 @@ article.tip-article.body-text p {
     transform: translateY(0);
   }
 }
+
 
 @media (max-width: 1024px) {
   .hero h1 {
